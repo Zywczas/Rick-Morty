@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Rick and Morty</string>
+
+<!--    nav graph-->
+    <string name="my_favourite">My Favourite</string>
+    <string name="all_characters">All Characters</string>
+    <string name="character_details">Character Details</string>
+
+</resources>
