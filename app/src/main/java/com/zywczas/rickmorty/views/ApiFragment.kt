@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.zywczas.rickmorty.R
+import kotlinx.android.synthetic.main.fragment_api.*
 import kotlinx.android.synthetic.main.fragment_db.*
 import javax.inject.Inject
 
@@ -18,9 +19,9 @@ class ApiFragment @Inject constructor() : Fragment(R.layout.fragment_api) {
         super.onViewCreated(view, savedInstanceState)
         val navController = findNavController()
         val appBarConfig =
-            AppBarConfiguration(setOf(R.id.destination_Db, R.id.destination_Db), drawerLayout_Db)
-        .setupWithNavController(navController)
-        .setupWithNavController(navController, appBarConfig)
+            AppBarConfiguration(setOf(R.id.destination_Db, R.id.destination_Api), drawerLayout_Api)
+        navDrawer_Api.setupWithNavController(navController)
+        toolbar_Api.setupWithNavController(navController, appBarConfig)
     }
 
 }

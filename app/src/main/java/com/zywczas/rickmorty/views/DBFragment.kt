@@ -18,7 +18,7 @@ class DBFragment @Inject constructor (private val session: SessionManager) : Fra
         super.onViewCreated(view, savedInstanceState)
         val navController = findNavController()
         val appBarConfig =
-            AppBarConfiguration(setOf(R.id.destination_Db, R.id.destination_Db), drawerLayout_Db)
+            AppBarConfiguration(setOf(R.id.destination_Db, R.id.destination_Api), drawerLayout_Db)
         navDrawer_Db.setupWithNavController(navController)
         toolbar_Db.setupWithNavController(navController, appBarConfig)
     }

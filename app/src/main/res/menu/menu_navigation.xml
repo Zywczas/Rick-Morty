@@ -4,11 +4,11 @@
     <item
         android:id="@+id/destination_Db"
         android:icon="@drawable/star_in_circle_icon"
-        android:title="@string/favourite_characters" />
+        android:title="@string/my_favourites" />
 
     <item
         android:id="@+id/destination_Api"
         android:icon="@android:drawable/ic_menu_search"
-        android:title="@string/browse_characters" />
+        android:title="@string/all_stars" />
 
 </menu>

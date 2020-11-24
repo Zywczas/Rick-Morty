@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/destination_Db"
         android:name="com.zywczas.rickmorty.views.DBFragment"
-        android:label="@string/my_favourite"
+        android:label="@string/my_favourites"
         tools:layout="@layout/fragment_db">
         <action
             android:id="@+id/actionToDetails"
@@ -22,7 +22,7 @@
     <fragment
         android:id="@+id/destination_Api"
         android:name="com.zywczas.rickmorty.views.ApiFragment"
-        android:label="@string/all_characters"
+        android:label="@string/all_stars"
         tools:layout="@layout/fragment_api">
         <action
             android:id="@+id/actionToDetails"

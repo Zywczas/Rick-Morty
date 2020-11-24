@@ -1,16 +1,12 @@
 <resources>
     <string name="app_name">Rick and Morty</string>
 
-<!--    nav graph-->
-    <string name="my_favourite">My Favourite</string>
-    <string name="all_characters">All Characters</string>
+    <!--    UI values-->
+    <string name="all_stars">All Stars</string>
+    <string name="my_favourites">My Favourites</string>
     <string name="character_details">Character Details</string>
 
 <!--    UI messages-->
     <string name="choose_category">Your list is empty. Click Find Movies from upper-left corner menu to find interesting movies.</string>
-
-<!--    UI values-->
-    <string name="browse_characters">All Stars</string>
-    <string name="favourite_characters">My Favourite</string>
 
 </resources>
