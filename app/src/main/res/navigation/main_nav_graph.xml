@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/destinationDb">
+    app:startDestination="@id/destination_Db">
 
     <fragment
-        android:id="@+id/destinationDb"
+        android:id="@+id/destination_Db"
         android:name="com.zywczas.rickmorty.views.DBFragment"
         android:label="@string/my_favourite"
         tools:layout="@layout/fragment_db">
         <action
             android:id="@+id/actionToDetails"
-            app:destination="@id/destinationDetails"
+            app:destination="@id/destination_Details"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -20,13 +20,13 @@
     </fragment>
 
     <fragment
-        android:id="@+id/destinationApi"
+        android:id="@+id/destination_Api"
         android:name="com.zywczas.rickmorty.views.ApiFragment"
         android:label="@string/all_characters"
         tools:layout="@layout/fragment_api">
         <action
             android:id="@+id/actionToDetails"
-            app:destination="@id/destinationDetails"
+            app:destination="@id/destination_Details"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -34,7 +34,7 @@
     </fragment>
 
     <fragment
-        android:id="@+id/destinationDetails"
+        android:id="@+id/destination_Details"
         android:name="com.zywczas.rickmorty.views.DetailsFragment"
         android:label="@string/character_details"
         tools:layout="@layout/fragment_details" />

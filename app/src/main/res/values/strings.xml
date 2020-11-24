@@ -6,4 +6,11 @@
     <string name="all_characters">All Characters</string>
     <string name="character_details">Character Details</string>
 
+<!--    UI messages-->
+    <string name="choose_category">Your list is empty. Click Find Movies from upper-left corner menu to find interesting movies.</string>
+
+<!--    UI values-->
+    <string name="browse_characters">All Stars</string>
+    <string name="favourite_characters">My Favourite</string>
+
 </resources>

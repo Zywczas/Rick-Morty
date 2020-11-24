@@ -8,9 +8,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class SessionManager @Inject constructor(
-    private val app: Application
-) {
+class SessionManager @Inject constructor(private val app: Application) {
 
     var isConnected = false
         private set

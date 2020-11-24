@@ -6,8 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.zywczas.rickmorty.R
+import javax.inject.Inject
 
-class DetailsFragment : Fragment(R.layout.fragment_details) {
+class DetailsFragment @Inject constructor() : Fragment(R.layout.fragment_details) {
 
 
 
