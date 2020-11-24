@@ -1,16 +1,13 @@
 package com.zywczas.rickmorty.views
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.zywczas.rickmorty.R
 import kotlinx.android.synthetic.main.fragment_api.*
-import kotlinx.android.synthetic.main.fragment_db.*
 import javax.inject.Inject
 
 class ApiFragment @Inject constructor() : Fragment(R.layout.fragment_api) {

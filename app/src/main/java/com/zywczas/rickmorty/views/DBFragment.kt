@@ -1,14 +1,13 @@
 package com.zywczas.rickmorty.views
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.SessionManager
-import com.zywczas.rickmorty.utilities.lazyAndroid
 import kotlinx.android.synthetic.main.fragment_db.*
 import javax.inject.Inject
 
