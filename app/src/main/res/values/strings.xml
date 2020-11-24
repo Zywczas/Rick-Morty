@@ -8,5 +8,10 @@
 
 <!--    UI messages-->
     <string name="choose_category">Your list is empty. Click Find Movies from upper-left corner menu to find interesting movies.</string>
+    <string name="no_more_pages">No more pages.</string>
+    <string name="connection_error">Couldn\'t download more characters. Try again.</string>
+    <string name="app_error">Couldn\'t download more characters. Contact with IT service.</string>
+
+
 
 </resources>

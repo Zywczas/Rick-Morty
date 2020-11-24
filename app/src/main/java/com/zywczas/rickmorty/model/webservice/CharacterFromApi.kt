@@ -29,17 +29,17 @@ data class CharacterFromApi (
     @Expose
     val gender: String?,
 
-    @SerializedName("originFromApi")
+    @SerializedName("origin")
     @Expose
     val originFromApi: OriginFromApi?,
 
-    @SerializedName("locationFromApi")
+    @SerializedName("location")
     @Expose
     val locationFromApi: LocationFromApi?,
 
     @SerializedName("image")
     @Expose
-    val image: String?,
+    val imageUrl: String?,
 
     @SerializedName("created")
     @Expose

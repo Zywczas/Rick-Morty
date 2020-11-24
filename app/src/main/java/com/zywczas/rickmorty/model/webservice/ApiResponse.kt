@@ -7,7 +7,7 @@ data class ApiResponse (
 
     @SerializedName("results")
     @Expose
-    val results: List<CharacterFromApi>?
+    val charactersFromApi: List<CharacterFromApi>?
 
 )
 
