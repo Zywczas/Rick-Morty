@@ -26,12 +26,12 @@ class ApiVM @Inject constructor(
             by lazy { MediatorLiveData<Resource<List<Character>>>() }
     val characters : LiveData<Resource<List<Character>>> by lazy { _characters }
 
-    fun getCharacters(){
+    fun getMoreCharacters(){
         if (session.isConnected){
             getNextPage()
         }
         else {
-            sendError(R.string.connection_error)
+            updateWithError(R.string.connection_error)
         }
     }
 
@@ -44,12 +44,12 @@ class ApiVM @Inject constructor(
                 page++
             } catch (e: Exception) {
                 logD(e)
-                sendError(R.string.download_error)
+                updateWithError(R.string.download_error)
             }
         }
     }
 
-    private fun sendError(msg : Int){
+    private fun updateWithError(msg : Int){
         _characters.postValue(Resource.error(msg, charactersList))
     }
 
