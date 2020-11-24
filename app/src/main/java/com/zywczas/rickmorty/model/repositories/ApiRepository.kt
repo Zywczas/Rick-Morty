@@ -45,7 +45,7 @@ class ApiRepository @Inject constructor(
         return characters
     }
 
-    private suspend fun returnError(response: Response<ApiResponse>): Resource<List<Character>> {
+    private fun returnError(response: Response<ApiResponse>): Resource<List<Character>> {
         return when (response.code()) {
             in 400..499 -> {
                 logD("Client error: ${response.code()}. ${response.message()}")
@@ -57,7 +57,7 @@ class ApiRepository @Inject constructor(
             }
             else -> {
                 returnError(response)
-                Resource.error(R.string.connection_error)
+                Resource.error(R.string.download_error)
             }
         }
     }

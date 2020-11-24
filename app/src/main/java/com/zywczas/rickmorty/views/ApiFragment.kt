@@ -19,6 +19,9 @@ class ApiFragment @Inject constructor() : Fragment(R.layout.fragment_api) {
             AppBarConfiguration(setOf(R.id.destination_Db, R.id.destination_Api), drawerLayout_Api)
         navDrawer_Api.setupWithNavController(navController)
         toolbar_Api.setupWithNavController(navController, appBarConfig)
+        if (savedInstanceState == null){
+
+        }
     }
 
 }
