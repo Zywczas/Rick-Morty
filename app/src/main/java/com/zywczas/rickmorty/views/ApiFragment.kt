@@ -13,10 +13,10 @@ import com.bumptech.glide.RequestManager
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.zywczas.rickmorty.R
+import com.zywczas.rickmorty.adapters.CharacterItem
 import com.zywczas.rickmorty.model.Character
 import com.zywczas.rickmorty.utilities.Status
 import com.zywczas.rickmorty.utilities.lazyAndroid
-import com.zywczas.rickmorty.utilities.logD
 import com.zywczas.rickmorty.utilities.showToast
 import com.zywczas.rickmorty.viewmodels.ApiVM
 import com.zywczas.rickmorty.viewmodels.UniversalVMFactory
@@ -25,11 +25,11 @@ import javax.inject.Inject
 
 class ApiFragment @Inject constructor(
     private val viewModelFactory : UniversalVMFactory,
-    private val glide: RequestManager
+    private val glide : RequestManager
 ) : Fragment(R.layout.fragment_api) {
 
     private val viewModel : ApiVM by viewModels { viewModelFactory }
-    private val itemAdapter by lazyAndroid { ItemAdapter<Character>() }
+    private val itemAdapter by lazyAndroid { ItemAdapter<CharacterItem>() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -78,7 +78,17 @@ class ApiFragment @Inject constructor(
     }
 
     private fun updateUI(characters : List<Character>){
-        itemAdapter.add(characters)
+        addToRecyclerView(characters)
+    }
+
+//todo dac coroutine
+    private fun addToRecyclerView(characters : List<Character>){
+        val items = arrayListOf<CharacterItem>()
+        characters.forEach {
+            val item = CharacterItem(it.id, it.name, it.imageUrl, glide)
+            items.add(item)
+        }
+        itemAdapter.add(items)
     }
 
     private fun showMessage(msg : Int){

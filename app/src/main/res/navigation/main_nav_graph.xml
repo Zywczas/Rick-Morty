@@ -37,5 +37,9 @@
         android:id="@+id/destination_Details"
         android:name="com.zywczas.rickmorty.views.DetailsFragment"
         android:label="@string/character_details"
-        tools:layout="@layout/fragment_details" />
+        tools:layout="@layout/fragment_details" >
+        <argument
+            android:name="characterId"
+            app:argType="integer" />
+    </fragment>
 </navigation>
