@@ -2,15 +2,20 @@ package com.zywczas.rickmorty.views
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.RequestManager
+import com.mikepenz.fastadapter.FastAdapter
+import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.model.Character
 import com.zywczas.rickmorty.utilities.Status
+import com.zywczas.rickmorty.utilities.lazyAndroid
 import com.zywczas.rickmorty.utilities.logD
 import com.zywczas.rickmorty.utilities.showToast
 import com.zywczas.rickmorty.viewmodels.ApiVM
@@ -24,12 +29,15 @@ class ApiFragment @Inject constructor(
 ) : Fragment(R.layout.fragment_api) {
 
     private val viewModel : ApiVM by viewModels { viewModelFactory }
+    private val itemAdapter by lazyAndroid { ItemAdapter<Character>() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupNavigationUI()
+        setupRecyclerView()
         setupObservers()
         if (savedInstanceState == null){
+            showProgressBar(true)
             viewModel.getMoreCharacters()
         }
     }
@@ -42,8 +50,17 @@ class ApiFragment @Inject constructor(
         toolbar_Api.setupWithNavController(navController, appBarConfig)
     }
 
+    private fun setupRecyclerView(){
+        val fastAdapter = FastAdapter.with(itemAdapter)
+        recyclerView_Api.adapter = fastAdapter
+        val layoutManager = GridLayoutManager(requireContext(), 2)
+        recyclerView_Api.layoutManager = layoutManager
+        recyclerView_Api.setHasFixedSize(true)
+    }
+
     private fun setupObservers(){
         viewModel.characters.observe(viewLifecycleOwner) { resource ->
+            showProgressBar(false)
             when (resource.status) {
                 Status.SUCCESS -> {
                     updateUI(resource.data!!)
@@ -56,11 +73,12 @@ class ApiFragment @Inject constructor(
         }
     }
 
+    private fun showProgressBar(isVisible : Boolean){
+        progressBar_Api.isVisible = isVisible
+    }
+
     private fun updateUI(characters : List<Character>){
-        //todo podac do recycler view
-        logD(characters[0].name)
-        logD(characters[10].name)
-        logD(characters[19].name)
+        itemAdapter.add(characters)
     }
 
     private fun showMessage(msg : Int){

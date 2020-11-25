@@ -12,3 +12,9 @@ fun <T> lazyAndroid(initializer: () -> T) : Lazy<T> = lazy(LazyThreadSafetyMode.
 private const val tag = "RickAndMorty"
 fun logD(msg : String) = Log.d(tag, msg)
 fun logD(e : Throwable) = Log.d(tag, "${e.message}")
+
+//todo dac room
+//todo dodac pagination
+//todo prawdopodobnie zamienic Api modul na przesylanie tylko po 20 postaci bo w ApiFragment moge dodawac kolejne
+//todo dac wczytywanie zdjec z kamery
+//todo dac details fragment

@@ -1,48 +1,50 @@
 package com.zywczas.rickmorty.model
 
-import com.google.gson.annotations.Expose
-import com.google.gson.annotations.SerializedName
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
+import com.bumptech.glide.RequestManager
+import com.mikepenz.fastadapter.FastAdapter
+import com.mikepenz.fastadapter.items.AbstractItem
+import com.zywczas.rickmorty.R
 
 class Character (
-
-    @SerializedName("id")
-    @Expose
     val id: Int,
-
-    @SerializedName("name")
-    @Expose
     val name: String,
-
-    @SerializedName("status")
-    @Expose
     val status: String,
-
-    @SerializedName("species")
-    @Expose
     val species: String,
-
-    @SerializedName("type")
-    @Expose
-    val type: String,
-
-    @SerializedName("gender")
-    @Expose
+    val characterType: String,
     val gender: String,
-
-    @SerializedName("origin")
-    @Expose
     val origin: String,
-
-    @SerializedName("location")
-    @Expose
     val location: String,
-
-    @SerializedName("image")
-    @Expose
     val imageUrl: String?,
+    val created: String,
+    private val glide : RequestManager
+) : AbstractItem<Character.ViewHolder>() {
 
-    @SerializedName("created")
-    @Expose
-    val created: String
+    override val layoutRes: Int
+        get() = R.layout.character_list_item
+    override val type: Int
+        get() = R.id.character_item
 
-)
+    override fun getViewHolder(v: View): ViewHolder {
+        return ViewHolder(v)
+    }
+
+    inner class ViewHolder(itemView : View) : FastAdapter.ViewHolder<Character>(itemView){
+        private val name : TextView = itemView.findViewById(R.id.name_textView_item)
+        private val poster : ImageView = itemView.findViewById(R.id.poster_imageView_item)
+
+        override fun bindView(item: Character, payloads: List<Any>) {
+            name.text = item.name
+            item.imageUrl?.let { glide.load(it).into(poster) }
+        }
+
+        override fun unbindView(item: Character) {
+            name.text = null
+            poster.setImageDrawable(null)
+        }
+
+    }
+
+}

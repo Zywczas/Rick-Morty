@@ -5,6 +5,14 @@
     <string name="all_stars">All Stars</string>
     <string name="my_favourites">My Favourites</string>
     <string name="character_details">Character Details</string>
+    <string name="name">Name:</string>
+    <string name="status">Status:</string>
+    <string name="species">Species:</string>
+    <string name="type">Type:</string>
+    <string name="gender">Gender:</string>
+    <string name="origin">Origin:</string>
+    <string name="location">Location:</string>
+    <string name="created">Created:</string>
 
 <!--    UI messages-->
     <string name="choose_category">Your list is empty. Click Find Movies from upper-left corner menu to find interesting movies.</string>

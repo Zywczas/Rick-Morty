@@ -2,7 +2,7 @@ package com.zywczas.rickmorty.model.repositories
 
 import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.model.Character
-import com.zywczas.rickmorty.model.toCharacter
+import com.zywczas.rickmorty.model.CharacterMapper
 import com.zywczas.rickmorty.model.webservice.ApiResponse
 import com.zywczas.rickmorty.model.webservice.ApiService
 import com.zywczas.rickmorty.model.webservice.CharacterFromApi
@@ -15,7 +15,8 @@ import javax.inject.Inject
 
 class ApiRepository @Inject constructor(
     private val apiService: ApiService,
-    private val dispatchers: Dispatchers
+    private val dispatchers: Dispatchers,
+    private val mapper: CharacterMapper
 ) {
 
     suspend fun downloadCharacters(page: Int): Resource<List<Character>> {
@@ -29,7 +30,7 @@ class ApiRepository @Inject constructor(
         }
     }
 
-    private suspend fun returnCharacters(response: Response<ApiResponse>): Resource<List<Character>> {
+    private fun returnCharacters(response: Response<ApiResponse>): Resource<List<Character>> {
         val charactersFromApi = response.body()?.charactersFromApi
         return if (charactersFromApi != null) {
             val characters = convertToCharacters(charactersFromApi)
@@ -39,9 +40,9 @@ class ApiRepository @Inject constructor(
         }
     }
 
-    private suspend fun convertToCharacters(charactersFromApi: List<CharacterFromApi>): List<Character> {
+    private fun convertToCharacters(charactersFromApi: List<CharacterFromApi>): List<Character> {
         val characters = arrayListOf<Character>()
-        charactersFromApi.forEach { characters.add(toCharacter(it)) }
+        charactersFromApi.forEach { characters.add(mapper.toCharacter(it)) }
         return characters
     }
 
@@ -56,7 +57,7 @@ class ApiRepository @Inject constructor(
                 Resource.error(R.string.app_error)
             }
             else -> {
-                returnError(response)
+                logD("${javaClass.name} error: ${response.code()}. ${response.message()}")
                 Resource.error(R.string.download_error)
             }
         }
