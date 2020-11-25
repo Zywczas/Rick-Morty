@@ -4,11 +4,15 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.RequestManager
 import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.utilities.lazyAndroid
 import com.zywczas.rickmorty.viewmodels.DetailsVM
 import com.zywczas.rickmorty.viewmodels.UniversalVMFactory
+import kotlinx.android.synthetic.main.fragment_api.*
 import kotlinx.android.synthetic.main.fragment_details.*
 import javax.inject.Inject
 
@@ -25,6 +29,7 @@ class DetailsFragment @Inject constructor(
         setupCharacterInfo()
         setupObservers()
         setupOnClickListeners()
+        setupNavigationUI()
     }
 
     private fun setupCharacterInfo(){
@@ -48,8 +53,14 @@ class DetailsFragment @Inject constructor(
     }
 
     private val addToDbBtnClickListener = View.OnClickListener {
-        val isButtonChecked = addToDb_btn_Details.tag as Boolean
+        val isButtonChecked = it.tag as Boolean
 //        viewModel.
+    }
+
+    private fun setupNavigationUI(){
+        val appBarConfig =
+            AppBarConfiguration(setOf(R.id.destination_Db, R.id.destination_Api))
+        toolbar_details.setupWithNavController(findNavController(), appBarConfig)
     }
 
 }
