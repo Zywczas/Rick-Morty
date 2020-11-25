@@ -50,10 +50,11 @@ class ApiFragment @Inject constructor(
         toolbar_Api.setupWithNavController(navController, appBarConfig)
     }
 
+    @Suppress("UNUSED_ANONYMOUS_PARAMETER")
     private fun setupRecyclerView(){
         val fastAdapter = FastAdapter.with(itemAdapter)
         fastAdapter.onClickListener = { view, adapter, item, position ->
-            goToDetailsFragment(item.id)
+            goToDetailsFragment(item.character)
             //todo sprawdzic czy to ma byc false
             false
         }
@@ -63,8 +64,8 @@ class ApiFragment @Inject constructor(
         recyclerView_Api.setHasFixedSize(true)
     }
 
-    private fun goToDetailsFragment(charId : Int){
-        val directions = ApiFragmentDirections.actionToDetails(charId)
+    private fun goToDetailsFragment(character : Character){
+        val directions = ApiFragmentDirections.actionToDetails(character)
         findNavController().navigate(directions)
     }
 
@@ -95,7 +96,7 @@ class ApiFragment @Inject constructor(
     private fun addToRecyclerView(characters : List<Character>){
         val items = arrayListOf<CharacterItem>()
         characters.forEach {
-            val item = CharacterItem(it.id, it.name, it.imageUrl, glide)
+            val item = CharacterItem(it, glide)
             items.add(item)
         }
         itemAdapter.add(items)

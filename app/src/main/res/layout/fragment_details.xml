@@ -20,7 +20,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-<!--todo pokazac Michalowi-->
+            <!--todo pokazac Michalowi-->
             <ImageView
                 android:id="@+id/poster_imageView_Details"
                 android:layout_marginStart="8dp"
@@ -37,24 +37,11 @@
                 app:layout_constraintWidth_max="300dp"
                 tools:src="@drawable/morty_example" />
 
-            <ProgressBar
-                android:id="@+id/progressBar_Details"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:visibility="visible" />
-
             <TextView
                 android:id="@+id/name_txtV_Details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/poster_imageView_Details"
@@ -65,11 +52,11 @@
                 android:id="@+id/status_txtV_Details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/name_txtV_Details"
-                app:layout_constraintTop_toBottomOf="@+id/name_txtV_Details"
+                app:layout_constraintTop_toBottomOf="@+id/addToDb_btn_Details"
                 tools:text="status" />
 
             <TextView
@@ -139,6 +126,34 @@
                 app:layout_constraintStart_toStartOf="@+id/location_txtV_Details"
                 app:layout_constraintTop_toBottomOf="@+id/location_txtV_Details"
                 tools:text="created" />
+
+            <ToggleButton
+                android:id="@+id/addToDb_btn_Details"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/add_to_list_toggle"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:text="ToggleButton"
+                android:textColor="@android:color/white"
+                android:textOff="Add to favourites"
+                android:textOn="Remove from favourites"
+                app:layout_constraintEnd_toEndOf="@+id/poster_imageView_Details"
+                app:layout_constraintTop_toBottomOf="@+id/name_txtV_Details" />
+
+            <ProgressBar
+                android:id="@+id/progressBar_Details"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

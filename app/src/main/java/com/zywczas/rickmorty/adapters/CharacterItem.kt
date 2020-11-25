@@ -7,11 +7,12 @@ import com.bumptech.glide.RequestManager
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.items.AbstractItem
 import com.zywczas.rickmorty.R
+import com.zywczas.rickmorty.model.Character
+import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
 
 class CharacterItem (
-    val id: Int,
-    val name: String,
-    val imageUrl: String?,
+    val character : Character,
     private val glide : RequestManager
 ) : AbstractItem<CharacterItem.ViewHolder>() {
 
@@ -30,8 +31,8 @@ class CharacterItem (
         private val poster : ImageView = itemView.findViewById(R.id.poster_imageView_item)
 
         override fun bindView(item: CharacterItem, payloads: List<Any>) {
-            name.text = item.name
-            item.imageUrl?.let { glide.load(it).into(poster) }
+            name.text = item.character.name
+            item.character.imageUrl?.let { glide.load(it).into(poster) }
         }
 
         override fun unbindView(item: CharacterItem) {

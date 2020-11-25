@@ -39,7 +39,7 @@
         android:label="@string/character_details"
         tools:layout="@layout/fragment_details" >
         <argument
-            android:name="characterId"
-            app:argType="integer" />
+            android:name="character"
+            app:argType="com.zywczas.rickmorty.model.Character" />
     </fragment>
 </navigation>
