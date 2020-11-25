@@ -9,7 +9,6 @@ import com.mikepenz.fastadapter.items.AbstractItem
 import com.zywczas.rickmorty.R
 
 class CharacterItem (
-    //todo mozliwe ze id nie potrzebne
     val id: Int,
     val name: String,
     val imageUrl: String?,
@@ -18,6 +17,7 @@ class CharacterItem (
 
     override val layoutRes: Int
         get() = R.layout.character_list_item
+    //todo nie wiem czy to dobrze, ale dziala :)
     override val type: Int
         get() = R.id.character_item
 

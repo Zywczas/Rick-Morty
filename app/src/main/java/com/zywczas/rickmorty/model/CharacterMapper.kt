@@ -15,6 +15,6 @@ fun toCharacter(characterFromApi: CharacterFromApi) =
         characterFromApi.originFromApi?.name ?: noInfo,
         characterFromApi.locationFromApi?.name ?: noInfo,
         characterFromApi.imageUrl,
-        characterFromApi.created ?: noInfo,
+        characterFromApi.created ?: noInfo
     )
 

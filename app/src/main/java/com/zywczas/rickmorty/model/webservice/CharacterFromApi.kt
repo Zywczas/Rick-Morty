@@ -43,7 +43,11 @@ data class CharacterFromApi (
 
     @SerializedName("created")
     @Expose
-    val created: String?
+    val created: String?,
+
+    @SerializedName("url")
+    @Expose
+    val characterUrl: String?
 
 )
 

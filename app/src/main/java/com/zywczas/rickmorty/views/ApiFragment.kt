@@ -52,10 +52,20 @@ class ApiFragment @Inject constructor(
 
     private fun setupRecyclerView(){
         val fastAdapter = FastAdapter.with(itemAdapter)
+        fastAdapter.onClickListener = { view, adapter, item, position ->
+            goToDetailsFragment(item.id)
+            //todo sprawdzic czy to ma byc false
+            false
+        }
         recyclerView_Api.adapter = fastAdapter
         val layoutManager = GridLayoutManager(requireContext(), 2)
         recyclerView_Api.layoutManager = layoutManager
         recyclerView_Api.setHasFixedSize(true)
+    }
+
+    private fun goToDetailsFragment(charId : Int){
+        val directions = ApiFragmentDirections.actionToDetails(charId)
+        findNavController().navigate(directions)
     }
 
     private fun setupObservers(){
