@@ -21,7 +21,6 @@ import com.zywczas.rickmorty.SessionManager
 import com.zywczas.rickmorty.adapters.CharacterItem
 import com.zywczas.rickmorty.model.Character
 import com.zywczas.rickmorty.utilities.Status
-import com.zywczas.rickmorty.utilities.lazyAndroid
 import com.zywczas.rickmorty.utilities.showToast
 import com.zywczas.rickmorty.viewmodels.DbVM
 import com.zywczas.rickmorty.viewmodels.UniversalVMFactory
@@ -35,7 +34,7 @@ class DBFragment @Inject constructor (
 ) : Fragment(R.layout.fragment_db) {
 
     private val viewModel : DbVM by viewModels { viewModelFactory }
-    private val itemAdapter by lazyAndroid { ItemAdapter<CharacterItem>() }
+    private val itemAdapter by lazy { ItemAdapter<CharacterItem>() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -6,7 +6,6 @@ import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.model.Character
 import com.zywczas.rickmorty.model.repositories.DetailsRepository
 import com.zywczas.rickmorty.utilities.Event
-import com.zywczas.rickmorty.utilities.lazyAndroid
 import com.zywczas.rickmorty.utilities.logD
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -14,10 +13,12 @@ import kotlin.Exception
 
 class DetailsVM @Inject constructor(private val repo: DetailsRepository) : ViewModel() {
 
-    private val _isCharacterInFavourites by lazyAndroid { MediatorLiveData<Boolean>() }
-    val isCharacterInFavourites : LiveData<Boolean> by lazyAndroid { _isCharacterInFavourites }
-    private val _message by lazyAndroid { MutableLiveData<Event<@StringRes Int>>() }
-    val message : LiveData<Event<Int>> by lazyAndroid { _message }
+    private val _isCharacterInFavourites = MediatorLiveData<Boolean>()
+    val isCharacterInFavourites : LiveData<Boolean> = _isCharacterInFavourites
+
+    private val _message = MutableLiveData<Event<@StringRes Int>>()
+    val message : LiveData<Event<Int>> = _message
+
     private var isCheckInitialized = false
 
     fun checkIfIsInList(charId : Int) {

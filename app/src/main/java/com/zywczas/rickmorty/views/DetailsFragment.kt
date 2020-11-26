@@ -10,7 +10,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.RequestManager
 import com.zywczas.rickmorty.R
-import com.zywczas.rickmorty.utilities.lazyAndroid
 import com.zywczas.rickmorty.utilities.logD
 import com.zywczas.rickmorty.utilities.showToast
 import com.zywczas.rickmorty.viewmodels.DetailsVM
@@ -25,7 +24,7 @@ class DetailsFragment @Inject constructor(
 ) : Fragment(R.layout.fragment_details) {
 
     private val viewModel : DetailsVM by viewModels { viewModelFactory }
-    private val character by lazyAndroid { requireArguments().let { DetailsFragmentArgs.fromBundle(it).character } }
+    private val character by lazy { requireArguments().let { DetailsFragmentArgs.fromBundle(it).character } }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

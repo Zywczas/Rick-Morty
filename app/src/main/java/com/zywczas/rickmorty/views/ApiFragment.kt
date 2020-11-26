@@ -22,7 +22,6 @@ import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.adapters.CharacterItem
 import com.zywczas.rickmorty.model.Character
 import com.zywczas.rickmorty.utilities.Status
-import com.zywczas.rickmorty.utilities.lazyAndroid
 import com.zywczas.rickmorty.utilities.logD
 import com.zywczas.rickmorty.utilities.showToast
 import com.zywczas.rickmorty.viewmodels.ApiVM
@@ -36,8 +35,8 @@ class ApiFragment @Inject constructor(
 ) : Fragment(R.layout.fragment_api) {
 
     private val viewModel : ApiVM by viewModels { viewModelFactory }
-    private val itemAdapter by lazyAndroid { ItemAdapter<CharacterItem>() }
-    private val fastAdapter by lazyAndroid { FastAdapter.with(itemAdapter) }
+    private val itemAdapter by lazy { ItemAdapter<CharacterItem>() }
+    private val fastAdapter by lazy { FastAdapter.with(itemAdapter) }
 
 //todo przy obracaniu i cofaniu pobiera kolejne poastacie a nie powinien
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
