@@ -23,7 +23,6 @@ class ApiVM @Inject constructor(
     private val _characters = MediatorLiveData<Resource<List<Character>>>()
     val characters : LiveData<Resource<List<Character>>> = _characters
 
-    private val charactersList = mutableListOf<Character>()
     private var page = 1
 
     init {
@@ -40,11 +39,11 @@ class ApiVM @Inject constructor(
     }
 
     private fun getNextPage(){
+        //todo pozamieniac viewmodelscope na dispatchers.IO
         viewModelScope.launch {
             try {
                 val repoResource = repo.downloadCharacters(page)
-                charactersList.addAll(repoResource.data!!)
-                _characters.value = Resource.success(charactersList)
+                _characters.value = repoResource
                 page++
             } catch (e: Exception) {
                 logD(e)
@@ -54,7 +53,7 @@ class ApiVM @Inject constructor(
     }
 
     private fun updateWithError(@StringRes msg : Int){
-        _characters.postValue(Resource.error(msg, charactersList))
+        _characters.postValue(Resource.error(msg))
     }
 
 

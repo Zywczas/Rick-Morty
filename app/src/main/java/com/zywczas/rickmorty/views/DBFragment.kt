@@ -92,6 +92,7 @@ class DBFragment @Inject constructor (
             val item = CharacterItem(it, glide)
             items.add(item)
         }
+        //todo to jest do kitu bo przesuwa mi recycler view na poczatek za kazdym razem, no chyba ze FastAdapter moze to gdzies zablokowac
         FastAdapterDiffUtil[itemAdapter] = items
         complete(true)
     }

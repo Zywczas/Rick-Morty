@@ -1,5 +1,7 @@
 package com.zywczas.rickmorty.views
 
+import android.content.Context
+import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
@@ -10,13 +12,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.AsyncDifferConfig
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.RequestManager
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
-import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
 import com.mikepenz.fastadapter.scroll.EndlessRecyclerOnScrollListener
 import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.adapters.CharacterItem
@@ -38,7 +37,11 @@ class ApiFragment @Inject constructor(
     private val itemAdapter by lazy { ItemAdapter<CharacterItem>() }
     private val fastAdapter by lazy { FastAdapter.with(itemAdapter) }
 
-//todo przy obracaniu i cofaniu pobiera kolejne poastacie a nie powinien
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         showProgressBar(true)
@@ -87,7 +90,6 @@ class ApiFragment @Inject constructor(
     private fun setupRvOnScrollListener(){
         val onScrollListener = object : EndlessRecyclerOnScrollListener(){
             override fun onLoadMore(currentPage: Int) {
-                //todo dac tutaj kontrolowanie strony
                 showProgressBar(true)
                 viewModel.getMoreCharacters()
             }
@@ -120,7 +122,6 @@ class ApiFragment @Inject constructor(
         addToRecyclerView(characters)
     }
 
-//todo dac coroutine?
     private fun addToRecyclerView(characters : List<Character>){
         val items = mutableListOf<CharacterItem>()
         characters.forEach {
