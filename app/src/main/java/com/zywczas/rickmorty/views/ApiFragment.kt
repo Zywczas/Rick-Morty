@@ -17,6 +17,7 @@ import com.zywczas.rickmorty.adapters.CharacterItem
 import com.zywczas.rickmorty.model.Character
 import com.zywczas.rickmorty.utilities.Status
 import com.zywczas.rickmorty.utilities.lazyAndroid
+import com.zywczas.rickmorty.utilities.logD
 import com.zywczas.rickmorty.utilities.showToast
 import com.zywczas.rickmorty.viewmodels.ApiVM
 import com.zywczas.rickmorty.viewmodels.UniversalVMFactory
@@ -103,7 +104,12 @@ class ApiFragment @Inject constructor(
     }
 
     private fun showMessage(msg : Int){
-        showToast(getString(msg))
+        try {
+            showToast(getString(msg))
+        } catch (e : Exception){
+            logD(e)
+            showToast("Error. Contact IT service.")
+        }
     }
 
 }

@@ -49,11 +49,11 @@ class ApiRepository @Inject constructor(
         return when (response.code()) {
             in 400..499 -> {
                 logD("Client error: ${response.code()}. ${response.message()}")
-                Resource.error(R.string.app_error)
+                Resource.error(R.string.other_api_error)
             }
             in 500..599 -> {
                 logD("Server error: ${response.code()}. ${response.message()}")
-                Resource.error(R.string.app_error)
+                Resource.error(R.string.other_api_error)
             }
             else -> {
                 logD("${javaClass.name} error: ${response.code()}. ${response.message()}")

@@ -13,8 +13,9 @@ private const val tag = "RickAndMorty"
 fun logD(msg : String) = Log.d(tag, msg)
 fun logD(e : Throwable) = Log.d(tag, "${e.message}")
 
-//todo dac room
-//todo dodac pagination
+
+//todo dodac pagination w api fragment
+//todo dodac pagination w DB module
 //todo prawdopodobnie zamienic Api modul na przesylanie tylko po 20 postaci bo w ApiFragment moge dodawac kolejne
 //todo dac wczytywanie zdjec z kamery
 //todo dac details fragment

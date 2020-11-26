@@ -5,20 +5,32 @@
     <string name="all_stars">All Stars</string>
     <string name="my_favourites">My Favourites</string>
     <string name="character_details">Character Details</string>
-    <string name="status">Status:</string>
-    <string name="species">Species:</string>
-    <string name="type">Type:</string>
-    <string name="gender">Gender:</string>
-    <string name="origin">Origin:</string>
-    <string name="location">Location:</string>
-    <string name="created">Created:</string>
+    <string name="status">Status: %1$s %2$s</string>
+    <string name="type">Type: %1$s</string>
+    <string name="gender">Gender: %1$s</string>
+    <string name="origin">Origin: %1$s</string>
+    <string name="location">Location: %1$s</string>
+    <string name="created">Created: %1$s</string>
 
 <!--    UI messages-->
     <string name="choose_category">Your list is empty. Click Find Movies from upper-left corner menu to find interesting movies.</string>
+    <string name="function_not_working">This function is not working correctly. Contact IT service.</string>
+
+
+<!--    Web service messages-->
     <string name="no_more_pages">No more pages.</string>
     <string name="download_error">Couldn\'t download more characters. Try again.</string>
     <string name="connection_error">No internet. Check your connection and try again.</string>
-    <string name="app_error">Couldn\'t download more characters. Contact with IT service.</string>
+    <string name="other_api_error">Couldn\'t download more characters. Contact with IT service.</string>
+
+<!--    Database messages-->
+    <string name="id_count_verify_error">Problem with verifying the character in Favourites. Go back and try again.</string>
+    <string name="insert_character_error">Couldn\'t add the character. Go back and try again.</string>
+    <string name="insert_character_success">Character added to the Favourites.</string>
+    <string name="delete_character_success">Character removed from the Favourites.</string>
+    <string name="delete_character_error">Couldn\'t remove the character. Go back and try again.</string>
+    <string name="other_database_error">Database error. Contact IT service.</string>
+
 
 
 

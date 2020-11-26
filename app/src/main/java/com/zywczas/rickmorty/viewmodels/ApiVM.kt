@@ -9,6 +9,7 @@ import com.zywczas.rickmorty.SessionManager
 import com.zywczas.rickmorty.model.Character
 import com.zywczas.rickmorty.model.repositories.ApiRepository
 import com.zywczas.rickmorty.utilities.Resource
+import com.zywczas.rickmorty.utilities.lazyAndroid
 import com.zywczas.rickmorty.utilities.logD
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -20,7 +21,7 @@ class ApiVM @Inject constructor(
 ) : ViewModel() {
 
     private var page = 1
-    private val charactersList by lazy { mutableListOf<Character>() }
+    private val charactersList by lazyAndroid { mutableListOf<Character>() }
 
     private val _characters
             by lazy { MediatorLiveData<Resource<List<Character>>>() }

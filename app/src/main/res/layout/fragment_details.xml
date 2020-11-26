@@ -64,7 +64,7 @@
                 tools:text="status" />
 
             <TextView
-                android:id="@+id/species_txtV_Details"
+                android:id="@+id/type_txtV_Details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -72,17 +72,6 @@
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/status_txtV_Details"
                 app:layout_constraintTop_toBottomOf="@+id/status_txtV_Details"
-                tools:text="species" />
-
-            <TextView
-                android:id="@+id/type_txtV_Details"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="@+id/species_txtV_Details"
-                app:layout_constraintTop_toBottomOf="@+id/species_txtV_Details"
                 tools:text="character type" />
 
             <TextView
