@@ -2,24 +2,104 @@ package com.zywczas.rickmorty.views
 
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.StringRes
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import com.bumptech.glide.RequestManager
+import com.mikepenz.fastadapter.FastAdapter
+import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.SessionManager
+import com.zywczas.rickmorty.adapters.CharacterItem
+import com.zywczas.rickmorty.model.Character
+import com.zywczas.rickmorty.utilities.Status
+import com.zywczas.rickmorty.utilities.lazyAndroid
+import com.zywczas.rickmorty.utilities.showToast
+import com.zywczas.rickmorty.viewmodels.DbVM
+import com.zywczas.rickmorty.viewmodels.UniversalVMFactory
 import kotlinx.android.synthetic.main.fragment_db.*
 import javax.inject.Inject
 
-class DBFragment @Inject constructor (private val session: SessionManager) : Fragment(R.layout.fragment_db) {
+class DBFragment @Inject constructor (
+    private val viewModelFactory: UniversalVMFactory,
+    private val glide: RequestManager,
+    private val session: SessionManager
+) : Fragment(R.layout.fragment_db) {
+
+    private val viewModel : DbVM by viewModels { viewModelFactory }
+    private val itemAdapter by lazyAndroid { ItemAdapter<CharacterItem>() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupNavigationUI()
+        setupRecyclerView()
+        setupCharactersObserver()
+    }
+
+    private fun setupNavigationUI(){
         val navController = findNavController()
         val appBarConfig =
             AppBarConfiguration(setOf(R.id.destination_Db, R.id.destination_Api), drawerLayout_Db)
         navDrawer_Db.setupWithNavController(navController)
         toolbar_Db.setupWithNavController(navController, appBarConfig)
+    }
+
+    @Suppress("UNUSED_ANONYMOUS_PARAMETER")
+    private fun setupRecyclerView(){
+        val fastAdapter = FastAdapter.with(itemAdapter)
+        fastAdapter.onClickListener = { view, adapter, item, position ->
+            goToDetailsFragment(item.character)
+            false
+        }
+        recyclerView_Db.adapter = fastAdapter
+        val layoutManager = GridLayoutManager(requireContext(), 2)
+        recyclerView_Db.layoutManager = layoutManager
+        recyclerView_Db.setHasFixedSize(true)
+    }
+
+    private fun goToDetailsFragment(character : Character){
+        val directions = DBFragmentDirections.actionToDetails(character)
+        findNavController().navigate(directions)
+    }
+
+    private fun setupCharactersObserver(){
+        viewModel.characters.observe(viewLifecycleOwner){ resource ->
+            when (resource.status){
+                Status.SUCCESS -> updateUI(resource.data!!)
+                Status.ERROR -> resource.message!!.getContentIfNotHandled()?.let { showMessage(it) }
+            }
+        }
+    }
+
+    private fun updateUI(characters : List<Character>){
+        addToRecyclerView(characters){finished ->
+            if (finished){
+                updateInfoAboutEmptyDb()
+            }
+        }
+    }
+
+    private fun addToRecyclerView(characters : List<Character>, complete: (Boolean) -> Unit){
+        val items = mutableListOf<CharacterItem>()
+        characters.forEach {
+            val item = CharacterItem(it, glide)
+            items.add(item)
+        }
+        itemAdapter.add(items)
+        complete(true)
+    }
+
+    private fun updateInfoAboutEmptyDb(){
+        emptyList_TextView_Db.isVisible = itemAdapter.itemList.isEmpty
+    }
+
+    private fun showMessage(@StringRes msg :  Int){
+        showToast(getString(msg))
     }
 
 }

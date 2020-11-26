@@ -1,7 +1,9 @@
 package com.zywczas.rickmorty.views
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.StringRes
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -36,7 +38,8 @@ class ApiFragment @Inject constructor(
         super.onViewCreated(view, savedInstanceState)
         setupNavigationUI()
         setupRecyclerView()
-        setupObservers()
+        setupCharactersObserver()
+        //todo to obecnie nie dziala bo nie mam onSavedStateInstance. Trzeba dac sprawdzenie w viewmodel
         if (savedInstanceState == null){
             showProgressBar(true)
             viewModel.getMoreCharacters()
@@ -70,7 +73,7 @@ class ApiFragment @Inject constructor(
         findNavController().navigate(directions)
     }
 
-    private fun setupObservers(){
+    private fun setupCharactersObserver(){
         viewModel.characters.observe(viewLifecycleOwner) { resource ->
             showProgressBar(false)
             when (resource.status) {
@@ -95,21 +98,16 @@ class ApiFragment @Inject constructor(
 
 //todo dac coroutine
     private fun addToRecyclerView(characters : List<Character>){
-        val items = arrayListOf<CharacterItem>()
+        val items = mutableListOf<CharacterItem>()
         characters.forEach {
             val item = CharacterItem(it, glide)
             items.add(item)
         }
         itemAdapter.add(items)
     }
-
-    private fun showMessage(msg : Int){
-        try {
-            showToast(getString(msg))
-        } catch (e : Exception){
-            logD(e)
-            showToast("Error. Contact IT service.")
-        }
+//todo pozamieniac wszedzie na res!!!!!!!!!!!!!!
+    private fun showMessage(@StringRes msg :  Int){
+        showToast(getString(msg))
     }
 
 }

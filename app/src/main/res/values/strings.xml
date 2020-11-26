@@ -13,7 +13,7 @@
     <string name="created">Created: %1$s</string>
 
 <!--    UI messages-->
-    <string name="choose_category">Your list is empty. Click Find Movies from upper-left corner menu to find interesting movies.</string>
+    <string name="browse_characters">Your list is empty. Click All Stars from upper-left corner menu to find your favourite characters.</string>
     <string name="function_not_working">This function is not working correctly. Contact IT service.</string>
 
 

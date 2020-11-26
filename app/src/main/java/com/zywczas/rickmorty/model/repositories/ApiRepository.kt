@@ -40,7 +40,7 @@ class ApiRepository @Inject constructor(
     }
 
     private fun convertToCharacters(charactersFromApi: List<CharacterFromApi>): List<Character> {
-        val characters = arrayListOf<Character>()
+        val characters = mutableListOf<Character>()
         charactersFromApi.forEach { characters.add(toCharacter(it)) }
         return characters
     }
