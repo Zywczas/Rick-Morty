@@ -12,7 +12,6 @@ import com.zywczas.rickmorty.model.repositories.ApiRepository
 import com.zywczas.rickmorty.utilities.Resource
 import com.zywczas.rickmorty.utilities.logD
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import javax.inject.Inject
 
 class ApiVM @Inject constructor(

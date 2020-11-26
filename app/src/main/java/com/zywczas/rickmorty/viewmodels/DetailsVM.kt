@@ -7,11 +7,15 @@ import com.zywczas.rickmorty.model.Character
 import com.zywczas.rickmorty.model.repositories.DetailsRepository
 import com.zywczas.rickmorty.utilities.Event
 import com.zywczas.rickmorty.utilities.logD
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
-import kotlin.Exception
 
-class DetailsVM @Inject constructor(private val repo: DetailsRepository) : ViewModel() {
+class DetailsVM @Inject constructor(
+    private val repo: DetailsRepository,
+    private val dispatchers : Dispatchers
+) : ViewModel() {
 
     private val _isCharacterInFavourites = MediatorLiveData<Boolean>()
     val isCharacterInFavourites : LiveData<Boolean> = _isCharacterInFavourites
@@ -19,26 +23,10 @@ class DetailsVM @Inject constructor(private val repo: DetailsRepository) : ViewM
     private val _message = MutableLiveData<Event<@StringRes Int>>()
     val message : LiveData<Event<Int>> = _message
 
-    private var isCheckInitialized = false
-
-    fun checkIfIsInList(charId : Int) {
-        if (isCheckInitialized.not()) {
-            isCheckInitialized = true
-            startCheckingIfIsInList(charId)
-        }
-    }
-
-    private fun startCheckingIfIsInList(charId : Int) {
-        viewModelScope.launch {
-            try {
-                val source = LiveDataReactiveStreams.fromPublisher(repo.isCharacterInDb(charId))
-                _isCharacterInFavourites.addSource(source){
-                    _isCharacterInFavourites.value = it
-                }
-            } catch (e: Exception) {
-                logD(e)
-                _message.value = Event(R.string.id_count_verify_error)
-            }
+    //todo pytanie do Michala: czy to powinno byc w try {...} i catch {..}?
+    suspend fun checkIfIsInList(charId : Int) {
+        withContext(dispatchers.IO){
+            _isCharacterInFavourites.postValue(repo.isCharacterInDb(charId))
         }
     }
 

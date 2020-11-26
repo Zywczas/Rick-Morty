@@ -1,6 +1,5 @@
 package com.zywczas.rickmorty.model.db
 
-import android.database.sqlite.SQLiteConstraintException
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
@@ -17,8 +16,7 @@ interface CharacterDao {
     @Query("SELECT * FROM characters")
     fun getCharacters() : Flow<List<CharacterFromDb>>
 
-    @Throws(Exception::class)
     @Query("SELECT COUNT(id) FROM characters WHERE id == :characterId")
-    fun getCount(characterId: Int) : Flow<Int>
+    suspend fun getCount(characterId: Int) : Int
 
 }

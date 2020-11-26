@@ -6,8 +6,7 @@ import com.zywczas.rickmorty.model.db.CharacterDao
 import com.zywczas.rickmorty.model.toCharacterFromDb
 import com.zywczas.rickmorty.utilities.Event
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.reactive.asPublisher
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import org.reactivestreams.Publisher
 import javax.inject.Inject
@@ -17,15 +16,13 @@ class DetailsRepository @Inject constructor(
     private val dispatchers : Dispatchers
 ) {
 
-    fun isCharacterInDb(charId : Int) : Publisher<Boolean> =
+    suspend fun isCharacterInDb(charId : Int) : Boolean =
          dao.getCount(charId)
-            .map { toBoolean(it) }
-            .flowOn(dispatchers.IO)
-                //todo czy nie dac dispatchers w Publisher
-            .asPublisher()
+             .toBoolean()
 
-    private fun toBoolean(count: Int) : Boolean =
-         when (count){
+
+    private fun Int.toBoolean() : Boolean =
+         when (this){
             0 -> false
             else -> true
         }

@@ -8,8 +8,6 @@ import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.items.AbstractItem
 import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.model.Character
-import kotlinx.android.parcel.Parcelize
-import kotlinx.android.parcel.RawValue
 
 class CharacterItem (
     val character : Character,

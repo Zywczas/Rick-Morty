@@ -1,13 +1,6 @@
 package com.zywczas.rickmorty.model
 
 import android.os.Parcelable
-import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
-import com.bumptech.glide.RequestManager
-import com.mikepenz.fastadapter.FastAdapter
-import com.mikepenz.fastadapter.items.AbstractItem
-import com.zywczas.rickmorty.R
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize

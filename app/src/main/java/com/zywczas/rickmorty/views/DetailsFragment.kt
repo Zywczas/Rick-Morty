@@ -5,6 +5,7 @@ import android.view.View
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
@@ -15,8 +16,8 @@ import com.zywczas.rickmorty.utilities.showToast
 import com.zywczas.rickmorty.viewmodels.DetailsVM
 import com.zywczas.rickmorty.viewmodels.UniversalVMFactory
 import kotlinx.android.synthetic.main.fragment_details.*
+import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.Exception
 
 class DetailsFragment @Inject constructor(
     private val glide : RequestManager,
@@ -71,7 +72,7 @@ class DetailsFragment @Inject constructor(
 
     private fun setupAddToDbBtnState(){
         setupAddToDbBtnObserver()
-        viewModel.checkIfIsInList(character.id)
+        lifecycleScope.launch { viewModel.checkIfIsInList(character.id) }
     }
 
     private fun setupAddToDbBtnObserver(){
