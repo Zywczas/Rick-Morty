@@ -39,6 +39,7 @@ class DBFragment @Inject constructor (
         setupNavigationUI()
         setupRecyclerView()
         setupCharactersObserver()
+        checkConnection()
     }
 
     private fun setupNavigationUI(){
@@ -100,6 +101,12 @@ class DBFragment @Inject constructor (
 
     private fun showMessage(@StringRes msg :  Int){
         showToast(getString(msg))
+    }
+
+    private fun checkConnection(){
+        if (session.isConnected.not()){
+            showMessage(R.string.connection_error)
+        }
     }
 
 }

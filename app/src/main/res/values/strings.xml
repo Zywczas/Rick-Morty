@@ -20,7 +20,7 @@
 <!--    Web service messages-->
     <string name="no_more_pages">No more pages.</string>
     <string name="download_error">Couldn\'t download more characters. Try again.</string>
-    <string name="connection_error">No internet. Check your connection and try again.</string>
+    <string name="connection_error">No internet. Check your connection.</string>
     <string name="other_api_error">Couldn\'t download more characters. Contact with IT service.</string>
 
 <!--    Database messages-->
