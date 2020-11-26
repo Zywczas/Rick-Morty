@@ -1,5 +1,6 @@
 package com.zywczas.rickmorty.viewmodels
 
+import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
@@ -22,10 +23,13 @@ class ApiVM @Inject constructor(
 
     private var page = 1
     private val charactersList by lazyAndroid { mutableListOf<Character>() }
-
     private val _characters
-            by lazy { MediatorLiveData<Resource<List<Character>>>() }
-    val characters : LiveData<Resource<List<Character>>> by lazy { _characters }
+            by lazyAndroid { MediatorLiveData<Resource<List<Character>>>() }
+    val characters : LiveData<Resource<List<Character>>> by lazyAndroid { _characters }
+
+    init {
+        getMoreCharacters()
+    }
 
     fun getMoreCharacters(){
         if (session.isConnected){
@@ -50,7 +54,7 @@ class ApiVM @Inject constructor(
         }
     }
 
-    private fun updateWithError(msg : Int){
+    private fun updateWithError(@StringRes msg : Int){
         _characters.postValue(Resource.error(msg, charactersList))
     }
 

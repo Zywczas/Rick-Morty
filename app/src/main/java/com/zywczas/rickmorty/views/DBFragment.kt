@@ -50,10 +50,9 @@ class DBFragment @Inject constructor (
         toolbar_Db.setupWithNavController(navController, appBarConfig)
     }
 
-    @Suppress("UNUSED_ANONYMOUS_PARAMETER")
     private fun setupRecyclerView(){
         val fastAdapter = FastAdapter.with(itemAdapter)
-        fastAdapter.onClickListener = { view, adapter, item, position ->
+        fastAdapter.onClickListener = { _, _, item, _ ->
             goToDetailsFragment(item.character)
             false
         }

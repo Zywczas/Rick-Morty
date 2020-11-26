@@ -1,6 +1,6 @@
 package com.zywczas.rickmorty.views
 
-import android.content.res.Resources
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.StringRes
@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.RequestManager
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
+import com.mikepenz.fastadapter.scroll.EndlessRecyclerOnScrollListener
 import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.adapters.CharacterItem
 import com.zywczas.rickmorty.model.Character
@@ -36,14 +37,14 @@ class ApiFragment @Inject constructor(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        showProgressBar(true)
         setupNavigationUI()
         setupRecyclerView()
         setupCharactersObserver()
-        //todo to obecnie nie dziala bo nie mam onSavedStateInstance. Trzeba dac sprawdzenie w viewmodel
-        if (savedInstanceState == null){
-            showProgressBar(true)
-            viewModel.getMoreCharacters()
-        }
+    }
+
+    private fun showProgressBar(isVisible : Boolean){
+        progressBar_Api.isVisible = isVisible
     }
 
     private fun setupNavigationUI(){
@@ -54,18 +55,39 @@ class ApiFragment @Inject constructor(
         toolbar_Api.setupWithNavController(navController, appBarConfig)
     }
 
-    @Suppress("UNUSED_ANONYMOUS_PARAMETER")
     private fun setupRecyclerView(){
+        setupRvAdapter()
+        setupRvLayoutManager()
+        setupRvOnScrollListener()
+        recyclerView_Api.setHasFixedSize(true)
+    }
+
+    private fun setupRvAdapter(){
         val fastAdapter = FastAdapter.with(itemAdapter)
-        fastAdapter.onClickListener = { view, adapter, item, position ->
+        fastAdapter.onClickListener = { _, _, item, _ ->
             goToDetailsFragment(item.character)
-            //todo sprawdzic czy to ma byc false
             false
         }
         recyclerView_Api.adapter = fastAdapter
-        val layoutManager = GridLayoutManager(requireContext(), 2)
+    }
+
+    private fun setupRvLayoutManager(){
+        var spanCount = 2
+        val orientation = resources.configuration.orientation
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE){
+            spanCount = 4
+        }
+        val layoutManager = GridLayoutManager(requireContext(), spanCount)
         recyclerView_Api.layoutManager = layoutManager
-        recyclerView_Api.setHasFixedSize(true)
+    }
+
+    private fun setupRvOnScrollListener(){
+        val onScrollListener = object : EndlessRecyclerOnScrollListener(){
+            override fun onLoadMore(currentPage: Int) {
+                viewModel.getMoreCharacters()
+            }
+        }
+        recyclerView_Api.addOnScrollListener(onScrollListener)
     }
 
     private fun goToDetailsFragment(character : Character){
@@ -86,10 +108,6 @@ class ApiFragment @Inject constructor(
                 }
             }
         }
-    }
-
-    private fun showProgressBar(isVisible : Boolean){
-        progressBar_Api.isVisible = isVisible
     }
 
     private fun updateUI(characters : List<Character>){

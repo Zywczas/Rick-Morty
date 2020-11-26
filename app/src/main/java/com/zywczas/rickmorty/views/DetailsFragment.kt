@@ -77,8 +77,6 @@ class DetailsFragment @Inject constructor(
 
     private fun setupAddToDbBtnObserver(){
         viewModel.isCharacterInFavourites.observe(viewLifecycleOwner){
-            //todo usunac
-            logD("is character in db: $it")
             addToDb_btn_Details.isChecked = it
             addToDb_btn_Details.tag = it
         }

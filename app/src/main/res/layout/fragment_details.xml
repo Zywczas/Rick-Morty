@@ -20,7 +20,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <!--todo pokazac Michalowi-->
             <ImageView
                 android:id="@+id/poster_imageView_Details"
                 android:layout_width="250dp"
@@ -37,8 +36,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@drawable/morty_example" />
-            <!--        todo app:layout_constraintWidth_max="300dp"    -->
-            <!--        todo app:layout_constraintHeight_max="300dp"    -->
 
             <TextView
                 android:id="@+id/name_txtV_Details"

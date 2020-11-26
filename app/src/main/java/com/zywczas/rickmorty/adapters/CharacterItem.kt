@@ -18,7 +18,6 @@ class CharacterItem (
 
     override val layoutRes: Int
         get() = R.layout.character_list_item
-    //todo nie wiem czy to dobrze, ale dziala :)
     override val type: Int
         get() = R.id.character_item
 

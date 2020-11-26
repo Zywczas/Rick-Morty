@@ -91,6 +91,7 @@ dependencies {
     //fast adapter
     implementation "com.mikepenz:fastadapter:5.3.1"
     implementation "com.mikepenz:fastadapter-extensions-expandable:5.3.1"
+    implementation "com.mikepenz:fastadapter-extensions-scroll:5.3.1"
 
     //tests
     testImplementation 'junit:junit:4.13'
