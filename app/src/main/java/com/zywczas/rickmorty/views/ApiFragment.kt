@@ -10,10 +10,13 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.AsyncDifferConfig
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.RequestManager
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
+import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
 import com.mikepenz.fastadapter.scroll.EndlessRecyclerOnScrollListener
 import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.adapters.CharacterItem
@@ -34,7 +37,9 @@ class ApiFragment @Inject constructor(
 
     private val viewModel : ApiVM by viewModels { viewModelFactory }
     private val itemAdapter by lazyAndroid { ItemAdapter<CharacterItem>() }
+    private val fastAdapter by lazyAndroid { FastAdapter.with(itemAdapter) }
 
+//todo przy obracaniu i cofaniu pobiera kolejne poastacie a nie powinien
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         showProgressBar(true)
@@ -63,7 +68,6 @@ class ApiFragment @Inject constructor(
     }
 
     private fun setupRvAdapter(){
-        val fastAdapter = FastAdapter.with(itemAdapter)
         fastAdapter.onClickListener = { _, _, item, _ ->
             goToDetailsFragment(item.character)
             false
@@ -84,6 +88,8 @@ class ApiFragment @Inject constructor(
     private fun setupRvOnScrollListener(){
         val onScrollListener = object : EndlessRecyclerOnScrollListener(){
             override fun onLoadMore(currentPage: Int) {
+                //todo dac tutaj kontrolowanie strony
+                showProgressBar(true)
                 viewModel.getMoreCharacters()
             }
         }
@@ -97,6 +103,7 @@ class ApiFragment @Inject constructor(
 
     private fun setupCharactersObserver(){
         viewModel.characters.observe(viewLifecycleOwner) { resource ->
+            logD("otrzymuje ${resource.data?.size} postaci")
             showProgressBar(false)
             when (resource.status) {
                 Status.SUCCESS -> {
@@ -114,7 +121,7 @@ class ApiFragment @Inject constructor(
         addToRecyclerView(characters)
     }
 
-//todo dac coroutine
+//todo dac coroutine?
     private fun addToRecyclerView(characters : List<Character>){
         val items = mutableListOf<CharacterItem>()
         characters.forEach {

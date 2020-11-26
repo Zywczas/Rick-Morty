@@ -9,10 +9,13 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.AsyncDifferConfig
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.RequestManager
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
+import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
 import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.SessionManager
 import com.zywczas.rickmorty.adapters.CharacterItem
@@ -90,7 +93,7 @@ class DBFragment @Inject constructor (
             val item = CharacterItem(it, glide)
             items.add(item)
         }
-        itemAdapter.add(items)
+        FastAdapterDiffUtil[itemAdapter] = items
         complete(true)
     }
 
