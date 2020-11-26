@@ -2,6 +2,7 @@ package com.zywczas.rickmorty.views
 
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -38,14 +39,9 @@ class DetailsFragment @Inject constructor(
         }
     }
 
-    private fun showMessage(msg : Int){
+    private fun showMessage(@StringRes msg :  Int){
         //todo pozamieniac na alert dialog
-        try {
-            showToast(getString(msg))
-        } catch (e : Exception){
-            logD(e)
-            showToast("Error. Contact IT service.")
-        }
+        showToast(getString(msg))
     }
 
     private fun startUISetupChain(){

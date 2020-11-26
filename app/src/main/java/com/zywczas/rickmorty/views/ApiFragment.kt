@@ -105,7 +105,7 @@ class ApiFragment @Inject constructor(
         }
         itemAdapter.add(items)
     }
-//todo pozamieniac wszedzie na res!!!!!!!!!!!!!!
+
     private fun showMessage(@StringRes msg :  Int){
         showToast(getString(msg))
     }

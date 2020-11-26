@@ -1,5 +1,7 @@
 package com.zywczas.rickmorty.utilities
 
+import androidx.annotation.StringRes
+
 data class Resource<out T>(val status: Status, val data: T?, val message: Event<Int>?) {
 
     companion object {
@@ -7,7 +9,7 @@ data class Resource<out T>(val status: Status, val data: T?, val message: Event<
             return Resource(Status.SUCCESS, data, null)
         }
 
-        fun <T> error(msg: Int, data: T? = null): Resource<T> {
+        fun <T> error(@StringRes msg: Int, data: T? = null): Resource<T> {
             return Resource(Status.ERROR, data, Event(msg))
         }
     }

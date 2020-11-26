@@ -1,5 +1,6 @@
 package com.zywczas.rickmorty.viewmodels
 
+import androidx.annotation.StringRes
 import androidx.lifecycle.*
 import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.model.Character
@@ -15,7 +16,7 @@ class DetailsVM @Inject constructor(private val repo: DetailsRepository) : ViewM
 
     private val _isCharacterInFavourites by lazyAndroid { MediatorLiveData<Boolean>() }
     val isCharacterInFavourites : LiveData<Boolean> by lazyAndroid { _isCharacterInFavourites }
-    private val _message by lazyAndroid { MutableLiveData<Event<Int>>() }
+    private val _message by lazyAndroid { MutableLiveData<Event<@StringRes Int>>() }
     val message : LiveData<Event<Int>> by lazyAndroid { _message }
     private var isCheckInitialized = false
 
