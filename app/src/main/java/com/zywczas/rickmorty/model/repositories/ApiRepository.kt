@@ -9,23 +9,19 @@ import com.zywczas.rickmorty.model.webservice.CharacterFromApi
 import com.zywczas.rickmorty.utilities.Resource
 import com.zywczas.rickmorty.utilities.logD
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import retrofit2.Response
 import javax.inject.Inject
 
 class ApiRepository @Inject constructor(
-    private val apiService: ApiService,
-    private val dispatchers: Dispatchers
+    private val apiService: ApiService
 ) {
 
     suspend fun downloadCharacters(page: Int): Resource<List<Character>> {
-        return withContext(dispatchers.IO) {
-            val response = apiService.getCharacters(page)
-            if (response.isSuccessful) {
-                returnCharacters(response)
-            } else {
-                returnError(response)
-            }
+        val response = apiService.getCharacters(page)
+        return if (response.isSuccessful) {
+            returnCharacters(response)
+        } else {
+            returnError(response)
         }
     }
 

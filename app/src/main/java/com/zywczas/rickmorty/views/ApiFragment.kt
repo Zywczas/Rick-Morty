@@ -9,6 +9,7 @@ import androidx.annotation.StringRes
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
@@ -26,6 +27,7 @@ import com.zywczas.rickmorty.utilities.showToast
 import com.zywczas.rickmorty.viewmodels.ApiVM
 import com.zywczas.rickmorty.viewmodels.UniversalVMFactory
 import kotlinx.android.synthetic.main.fragment_api.*
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ApiFragment @Inject constructor(
@@ -91,7 +93,7 @@ class ApiFragment @Inject constructor(
         val onScrollListener = object : EndlessRecyclerOnScrollListener(){
             override fun onLoadMore(currentPage: Int) {
                 showProgressBar(true)
-                viewModel.getMoreCharacters()
+                lifecycleScope.launch { viewModel.getMoreCharacters() }
             }
         }
         recyclerView_Api.addOnScrollListener(onScrollListener)
@@ -104,7 +106,6 @@ class ApiFragment @Inject constructor(
 
     private fun setupCharactersObserver(){
         viewModel.characters.observe(viewLifecycleOwner) { resource ->
-            logD("otrzymuje ${resource.data?.size} postaci")
             showProgressBar(false)
             when (resource.status) {
                 Status.SUCCESS -> {

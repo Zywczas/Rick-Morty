@@ -12,8 +12,7 @@ import org.reactivestreams.Publisher
 import javax.inject.Inject
 
 class DetailsRepository @Inject constructor(
-    private val dao : CharacterDao,
-    private val dispatchers : Dispatchers
+    private val dao : CharacterDao
 ) {
 
     suspend fun isCharacterInDb(charId : Int) : Boolean =

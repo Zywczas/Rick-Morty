@@ -10,48 +10,43 @@ import com.zywczas.rickmorty.SessionManager
 import com.zywczas.rickmorty.model.Character
 import com.zywczas.rickmorty.model.repositories.ApiRepository
 import com.zywczas.rickmorty.utilities.Resource
-import com.zywczas.rickmorty.utilities.logD
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class ApiVM @Inject constructor(
-    private val repo : ApiRepository,
-    private val session : SessionManager
+    private val repo: ApiRepository,
+    private val session: SessionManager,
+    private val dispatchers: Dispatchers
 ) : ViewModel() {
 
     private val _characters = MediatorLiveData<Resource<List<Character>>>()
-    val characters : LiveData<Resource<List<Character>>> = _characters
+    val characters: LiveData<Resource<List<Character>>> = _characters
 
     private var page = 1
 
     init {
-        getMoreCharacters()
+        viewModelScope.launch { getMoreCharacters() }
     }
 
-    fun getMoreCharacters(){
-        if (session.isConnected){
-            getNextPage()
-        }
-        else {
-            updateWithError(R.string.connection_error)
-        }
-    }
-
-    private fun getNextPage(){
-        //todo pozamieniac viewmodelscope na dispatchers.IO
-        viewModelScope.launch {
-            try {
-                val repoResource = repo.downloadCharacters(page)
-                _characters.value = repoResource
-                page++
-            } catch (e: Exception) {
-                logD(e)
-                updateWithError(R.string.download_error)
+    suspend fun getMoreCharacters() {
+        withContext(dispatchers.IO){
+            if (session.isConnected) {
+                getNextPage()
+            } else {
+                updateWithError(R.string.connection_error)
             }
         }
     }
 
-    private fun updateWithError(@StringRes msg : Int){
+    private suspend fun getNextPage() {
+        val repoResource = repo.downloadCharacters(page)
+        _characters.postValue(repoResource)
+        page++
+    }
+
+    private fun updateWithError(@StringRes msg: Int) {
         _characters.postValue(Resource.error(msg))
     }
 
