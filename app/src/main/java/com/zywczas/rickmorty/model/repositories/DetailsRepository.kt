@@ -20,29 +20,26 @@ class DetailsRepository @Inject constructor(
          dao.getCount(charId)
              .toBoolean()
 
-
     private fun Int.toBoolean() : Boolean =
          when (this){
             0 -> false
             else -> true
         }
 
-    suspend fun addCharacterToDb(character : Character) : Event<Int> =
-        withContext(dispatchers.IO){
+    suspend fun addCharacterToDb(character : Character) : Event<Int> {
             val characterFromDb = toCharacterFromDb(character)
             val result = dao.insert(characterFromDb)
-            if (result == -1L){
+            return if (result == -1L){
                 Event(R.string.insert_character_error)
             } else {
                 Event(R.string.insert_character_success)
             }
         }
 
-    suspend fun removeCharacterFromDb(character: Character) : Event<Int> =
-        withContext(dispatchers.IO){
+    suspend fun removeCharacterFromDb(character: Character) : Event<Int> {
             val characterFromDb = toCharacterFromDb(character)
             val numberOfRowsRemoved = dao.delete(characterFromDb)
-            if (numberOfRowsRemoved == 0){
+            return if (numberOfRowsRemoved == 0){
                 Event(R.string.delete_character_error)
             } else {
                 Event(R.string.delete_character_success)

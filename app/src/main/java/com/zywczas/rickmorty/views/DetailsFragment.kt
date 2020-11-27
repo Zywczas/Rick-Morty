@@ -103,7 +103,10 @@ class DetailsFragment @Inject constructor(
     }
 
     private fun addOrRemoveCharacterFromFavourites(isInFavourites : Boolean){
-        viewModel.addOrRemoveCharacterFromFavourites(character, isInFavourites)
+        lifecycleScope.launch {
+            viewModel.addOrRemoveCharacterFromFavourites(character, isInFavourites)
+            viewModel.checkIfIsInList(character.id)
+        }
     }
 
 
