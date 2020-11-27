@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.SessionManager
 import com.zywczas.rickmorty.model.Character
+import com.zywczas.rickmorty.model.repositories.ApiRepoResource
 import com.zywczas.rickmorty.model.repositories.ApiRepository
 import com.zywczas.rickmorty.utilities.Resource
 import kotlinx.coroutines.Dispatchers
@@ -21,8 +22,8 @@ class ApiVM @Inject constructor(
     private val dispatchers: Dispatchers
 ) : ViewModel() {
 
-    private val _characters = MediatorLiveData<Resource<List<Character>>>()
-    val characters: LiveData<Resource<List<Character>>> = _characters
+    private val _characters = MediatorLiveData<ApiRepoResource<List<Character>>>()
+    val characters: LiveData<ApiRepoResource<List<Character>>> = _characters
 
     private var page = 1
 
@@ -47,7 +48,7 @@ class ApiVM @Inject constructor(
     }
 
     private fun updateWithError(@StringRes msg: Int) {
-        _characters.postValue(Resource.error(msg))
+        _characters.postValue(ApiRepoResource.error(msg))
     }
 
 

@@ -16,7 +16,7 @@ class ApiRepository @Inject constructor(
     private val apiService: ApiService
 ) {
 
-    suspend fun downloadCharacters(page: Int): Resource<List<Character>> {
+    suspend fun downloadCharacters(page: Int): ApiRepoResource<List<Character>> {
         val response = apiService.getCharacters(page)
         return if (response.isSuccessful) {
             returnCharacters(response)
@@ -25,13 +25,13 @@ class ApiRepository @Inject constructor(
         }
     }
 
-    private fun returnCharacters(response: Response<ApiResponse>): Resource<List<Character>> {
+    private fun returnCharacters(response: Response<ApiResponse>): ApiRepoResource<List<Character>> {
         val charactersFromApi = response.body()?.charactersFromApi
         return if (charactersFromApi != null) {
             val characters = convertToCharacters(charactersFromApi)
-            Resource.success(characters)
+            ApiRepoResource.success(characters)
         } else {
-            Resource.error(R.string.no_more_pages)
+            ApiRepoResource.error(R.string.no_more_pages)
         }
     }
 
@@ -41,19 +41,19 @@ class ApiRepository @Inject constructor(
         return characters
     }
 
-    private fun returnError(response: Response<ApiResponse>): Resource<List<Character>> {
+    private fun returnError(response: Response<ApiResponse>): ApiRepoResource<List<Character>> {
         return when (response.code()) {
             in 400..499 -> {
                 logD("Client error: ${response.code()}. ${response.message()}")
-                Resource.error(R.string.other_api_error)
+                ApiRepoResource.error(R.string.other_api_error)
             }
             in 500..599 -> {
                 logD("Server error: ${response.code()}. ${response.message()}")
-                Resource.error(R.string.other_api_error)
+                ApiRepoResource.error(R.string.other_api_error)
             }
             else -> {
                 logD("${javaClass.name} error: ${response.code()}. ${response.message()}")
-                Resource.error(R.string.download_error)
+                ApiRepoResource.error(R.string.download_error)
             }
         }
     }
