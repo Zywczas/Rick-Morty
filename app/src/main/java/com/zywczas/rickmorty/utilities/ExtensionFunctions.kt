@@ -13,4 +13,3 @@ fun logD(e : Throwable) = Log.d(tag, "${e.message}")
 
 //todo dodac pagination w DB module
 //todo dac wczytywanie zdjec z kamery
-//todo podzielic wszystkie Resource na pojedyncze dla kazdego modulu
