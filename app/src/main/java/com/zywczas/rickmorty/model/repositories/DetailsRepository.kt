@@ -25,23 +25,23 @@ class DetailsRepository @Inject constructor(
             else -> true
         }
 
-    suspend fun addCharacterToDb(character : Character) : Event<Int> {
+    suspend fun addCharacterToDb(character : Character) : DetailsEvent<Int> {
             val characterFromDb = toCharacterFromDb(character)
             val result = dao.insert(characterFromDb)
             return if (result == -1L){
-                Event(R.string.insert_character_error)
+                DetailsEvent(R.string.insert_character_error)
             } else {
-                Event(R.string.insert_character_success)
+                DetailsEvent(R.string.insert_character_success)
             }
         }
 
-    suspend fun removeCharacterFromDb(character: Character) : Event<Int> {
+    suspend fun removeCharacterFromDb(character: Character) : DetailsEvent<Int> {
             val characterFromDb = toCharacterFromDb(character)
             val numberOfRowsRemoved = dao.delete(characterFromDb)
             return if (numberOfRowsRemoved == 0){
-                Event(R.string.delete_character_error)
+                DetailsEvent(R.string.delete_character_error)
             } else {
-                Event(R.string.delete_character_success)
+                DetailsEvent(R.string.delete_character_success)
             }
         }
 

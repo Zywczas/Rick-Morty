@@ -6,6 +6,7 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.zywczas.rickmorty.model.Character
+import com.zywczas.rickmorty.model.repositories.DetailsEvent
 import com.zywczas.rickmorty.model.repositories.DetailsRepository
 import com.zywczas.rickmorty.utilities.Event
 import com.zywczas.rickmorty.utilities.logD
@@ -21,8 +22,8 @@ class DetailsVM @Inject constructor(
     private val _isCharacterInFavourites = MediatorLiveData<Boolean>()
     val isCharacterInFavourites: LiveData<Boolean> = _isCharacterInFavourites
 
-    private val _message = MutableLiveData<Event<@StringRes Int>>()
-    val message: LiveData<Event<Int>> = _message
+    private val _message = MutableLiveData<DetailsEvent<@StringRes Int>>()
+    val message: LiveData<DetailsEvent<Int>> = _message
 
     suspend fun checkIfIsInList(charId: Int) {
         withContext(dispatchers.IO) {

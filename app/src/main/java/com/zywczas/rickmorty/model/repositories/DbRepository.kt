@@ -20,12 +20,12 @@ class DbRepository @Inject constructor(
     private val dispatchers : Dispatchers
 ) {
 
-    fun getCharactersFromDb() : Publisher<Resource<List<Character>>> =
+    fun getCharactersFromDb() : Publisher<DbResource<List<Character>>> =
         dao.getCharacters()
-            .map { Resource.success(toCharacters(it)) }
+            .map { DbResource.success(toCharacters(it)) }
             .catch {
                 logD(it)
-                emit(Resource.error(R.string.other_database_error))
+                emit(DbResource.error(R.string.other_database_error))
             }
             .flowOn(dispatchers.IO)
             .asPublisher()

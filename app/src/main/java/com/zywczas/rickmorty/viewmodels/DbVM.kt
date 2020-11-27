@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.zywczas.rickmorty.model.repositories.DbRepository
 import javax.inject.Inject
 
-class DbVM @Inject constructor(private val repo : DbRepository) : ViewModel() {
+class DbVM @Inject constructor(repo : DbRepository) : ViewModel() {
 
     val characters = LiveDataReactiveStreams.fromPublisher(repo.getCharactersFromDb())
 
