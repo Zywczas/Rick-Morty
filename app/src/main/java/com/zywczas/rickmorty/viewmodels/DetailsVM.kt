@@ -8,8 +8,6 @@ import androidx.lifecycle.ViewModel
 import com.zywczas.rickmorty.model.Character
 import com.zywczas.rickmorty.model.repositories.DetailsEvent
 import com.zywczas.rickmorty.model.repositories.DetailsRepository
-import com.zywczas.rickmorty.utilities.Event
-import com.zywczas.rickmorty.utilities.logD
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

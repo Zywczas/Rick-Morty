@@ -4,11 +4,6 @@ import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.model.Character
 import com.zywczas.rickmorty.model.db.CharacterDao
 import com.zywczas.rickmorty.model.toCharacterFromDb
-import com.zywczas.rickmorty.utilities.Event
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.withContext
-import org.reactivestreams.Publisher
 import javax.inject.Inject
 
 class DetailsRepository @Inject constructor(

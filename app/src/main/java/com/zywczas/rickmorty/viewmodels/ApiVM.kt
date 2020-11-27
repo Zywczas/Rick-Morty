@@ -8,8 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.SessionManager
 import com.zywczas.rickmorty.model.Character
-import com.zywczas.rickmorty.model.repositories.ApiResource
 import com.zywczas.rickmorty.model.repositories.ApiRepository
+import com.zywczas.rickmorty.model.repositories.ApiResource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

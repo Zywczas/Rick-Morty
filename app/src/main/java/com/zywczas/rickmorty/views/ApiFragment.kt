@@ -21,8 +21,7 @@ import com.mikepenz.fastadapter.scroll.EndlessRecyclerOnScrollListener
 import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.adapters.CharacterItem
 import com.zywczas.rickmorty.model.Character
-import com.zywczas.rickmorty.utilities.Status
-import com.zywczas.rickmorty.utilities.logD
+import com.zywczas.rickmorty.model.repositories.ApiStatus
 import com.zywczas.rickmorty.utilities.showToast
 import com.zywczas.rickmorty.viewmodels.ApiVM
 import com.zywczas.rickmorty.viewmodels.UniversalVMFactory
@@ -108,10 +107,10 @@ class ApiFragment @Inject constructor(
         viewModel.characters.observe(viewLifecycleOwner) { resource ->
             showProgressBar(false)
             when (resource.status) {
-                Status.SUCCESS -> {
+                ApiStatus.SUCCESS -> {
                     updateUI(resource.data!!)
                 }
-                Status.ERROR -> {
+                ApiStatus.ERROR -> {
                     resource.data?.let { updateUI(it) }
                     resource.message?.getContentIfNotHandled()?.let { showMessage(it) }
                 }

@@ -18,7 +18,7 @@ import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.SessionManager
 import com.zywczas.rickmorty.adapters.CharacterItem
 import com.zywczas.rickmorty.model.Character
-import com.zywczas.rickmorty.utilities.Status
+import com.zywczas.rickmorty.model.repositories.DbStatus
 import com.zywczas.rickmorty.utilities.showToast
 import com.zywczas.rickmorty.viewmodels.DbVM
 import com.zywczas.rickmorty.viewmodels.UniversalVMFactory
@@ -70,8 +70,8 @@ class DBFragment @Inject constructor (
     private fun setupCharactersObserver(){
         viewModel.characters.observe(viewLifecycleOwner){ resource ->
             when (resource.status){
-                Status.SUCCESS -> updateUI(resource.data!!)
-                Status.ERROR -> resource.message!!.getContentIfNotHandled()?.let { showMessage(it) }
+                DbStatus.SUCCESS -> updateUI(resource.data!!)
+                DbStatus.ERROR -> resource.message!!.getContentIfNotHandled()?.let { showMessage(it) }
             }
         }
     }
