@@ -1,6 +1,6 @@
 package com.zywczas.rickmorty.di
 
-import com.zywczas.rickmorty.views.MainActivity
+import com.zywczas.rickmorty.main.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

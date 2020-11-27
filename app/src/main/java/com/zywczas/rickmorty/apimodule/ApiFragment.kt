@@ -1,4 +1,4 @@
-package com.zywczas.rickmorty.views
+package com.zywczas.rickmorty.apimodule
 
 import android.content.Context
 import android.content.pm.ActivityInfo
@@ -21,10 +21,9 @@ import com.mikepenz.fastadapter.scroll.EndlessRecyclerOnScrollListener
 import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.adapters.CharacterItem
 import com.zywczas.rickmorty.model.Character
-import com.zywczas.rickmorty.model.repositories.ApiStatus
+import com.zywczas.rickmorty.apimodule.utils.ApiStatus
 import com.zywczas.rickmorty.utilities.showToast
-import com.zywczas.rickmorty.viewmodels.ApiVM
-import com.zywczas.rickmorty.viewmodels.UniversalVMFactory
+import com.zywczas.rickmorty.factories.UniversalVMFactory
 import kotlinx.android.synthetic.main.fragment_api.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject

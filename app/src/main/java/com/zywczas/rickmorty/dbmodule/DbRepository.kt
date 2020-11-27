@@ -1,9 +1,10 @@
-package com.zywczas.rickmorty.model.repositories
+package com.zywczas.rickmorty.dbmodule
 
 import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.model.Character
 import com.zywczas.rickmorty.model.db.CharacterDao
 import com.zywczas.rickmorty.model.db.CharacterFromDb
+import com.zywczas.rickmorty.dbmodule.utils.DbResource
 import com.zywczas.rickmorty.model.toCharacter
 import com.zywczas.rickmorty.utilities.logD
 import kotlinx.coroutines.Dispatchers

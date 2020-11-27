@@ -1,4 +1,4 @@
-package com.zywczas.rickmorty.views
+package com.zywczas.rickmorty.factories
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory

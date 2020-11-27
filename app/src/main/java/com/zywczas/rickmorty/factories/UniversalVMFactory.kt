@@ -1,4 +1,4 @@
-package com.zywczas.rickmorty.viewmodels
+package com.zywczas.rickmorty.factories
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

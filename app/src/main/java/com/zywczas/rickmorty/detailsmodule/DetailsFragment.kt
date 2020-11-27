@@ -1,4 +1,4 @@
-package com.zywczas.rickmorty.views
+package com.zywczas.rickmorty.detailsmodule
 
 import android.os.Bundle
 import android.view.View
@@ -13,8 +13,7 @@ import com.bumptech.glide.RequestManager
 import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.utilities.logD
 import com.zywczas.rickmorty.utilities.showToast
-import com.zywczas.rickmorty.viewmodels.DetailsVM
-import com.zywczas.rickmorty.viewmodels.UniversalVMFactory
+import com.zywczas.rickmorty.factories.UniversalVMFactory
 import kotlinx.android.synthetic.main.fragment_details.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject

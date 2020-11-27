@@ -1,7 +1,8 @@
-package com.zywczas.rickmorty.model.repositories
+package com.zywczas.rickmorty.apimodule
 
 import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.model.Character
+import com.zywczas.rickmorty.apimodule.utils.ApiResource
 import com.zywczas.rickmorty.model.toCharacter
 import com.zywczas.rickmorty.model.webservice.ApiResponse
 import com.zywczas.rickmorty.model.webservice.ApiService

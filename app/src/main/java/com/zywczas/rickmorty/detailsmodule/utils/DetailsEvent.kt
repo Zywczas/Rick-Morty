@@ -1,4 +1,4 @@
-package com.zywczas.rickmorty.model.repositories
+package com.zywczas.rickmorty.detailsmodule.utils
 
 /**
  * Used as a wrapper for data that is exposed via a LiveData that represents an event.

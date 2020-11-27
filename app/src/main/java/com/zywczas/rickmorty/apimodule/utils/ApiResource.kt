@@ -1,4 +1,4 @@
-package com.zywczas.rickmorty.model.repositories
+package com.zywczas.rickmorty.apimodule.utils
 
 import androidx.annotation.StringRes
 

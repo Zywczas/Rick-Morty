@@ -1,8 +1,9 @@
-package com.zywczas.rickmorty.model.repositories
+package com.zywczas.rickmorty.detailsmodule
 
 import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.model.Character
 import com.zywczas.rickmorty.model.db.CharacterDao
+import com.zywczas.rickmorty.detailsmodule.utils.DetailsEvent
 import com.zywczas.rickmorty.model.toCharacterFromDb
 import javax.inject.Inject
 

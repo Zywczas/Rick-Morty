@@ -1,4 +1,4 @@
-package com.zywczas.rickmorty.views
+package com.zywczas.rickmorty.dbmodule
 
 import android.os.Bundle
 import android.view.View
@@ -18,10 +18,9 @@ import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.SessionManager
 import com.zywczas.rickmorty.adapters.CharacterItem
 import com.zywczas.rickmorty.model.Character
-import com.zywczas.rickmorty.model.repositories.DbStatus
+import com.zywczas.rickmorty.dbmodule.utils.DbStatus
 import com.zywczas.rickmorty.utilities.showToast
-import com.zywczas.rickmorty.viewmodels.DbVM
-import com.zywczas.rickmorty.viewmodels.UniversalVMFactory
+import com.zywczas.rickmorty.factories.UniversalVMFactory
 import kotlinx.android.synthetic.main.fragment_db.*
 import javax.inject.Inject
 
