@@ -1,4 +1,4 @@
-package com.zywczas.rickmorty.apiFragment.presentation
+package com.zywczas.rickmorty.onlineCharacterListFragment.presentation
 
 import android.content.Context
 import android.content.pm.ActivityInfo
@@ -19,22 +19,22 @@ import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.scroll.EndlessRecyclerOnScrollListener
 import com.zywczas.rickmorty.R
-import com.zywczas.rickmorty.apiFragment.adapter.ApiCharacterItem
+import com.zywczas.rickmorty.onlineCharacterListFragment.adapter.OnlineCharacterListItem
 import com.zywczas.rickmorty.model.Character
-import com.zywczas.rickmorty.apiFragment.utils.ApiStatus
+import com.zywczas.rickmorty.onlineCharacterListFragment.utils.OnlineCharacterListStatus
 import com.zywczas.rickmorty.factories.UniversalVMFactory
 import com.zywczas.rickmorty.utilities.showSnackbar
 import kotlinx.android.synthetic.main.fragment_api.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class ApiFragment @Inject constructor(
+class OnlineCharacterListFragment @Inject constructor(
     private val viewModelFactory : UniversalVMFactory,
     private val glide : RequestManager
 ) : Fragment(R.layout.fragment_api) {
 
-    private val viewModel : ApiVM by viewModels { viewModelFactory }
-    private val itemAdapter by lazy { ItemAdapter<ApiCharacterItem>() }
+    private val viewModel : OnlineCharacterListViewModel by viewModels { viewModelFactory }
+    private val itemAdapter by lazy { ItemAdapter<OnlineCharacterListItem>() }
     private val fastAdapter by lazy { FastAdapter.with(itemAdapter) }
 
     override fun onAttach(context: Context) {
@@ -98,7 +98,7 @@ class ApiFragment @Inject constructor(
     }
 
     private fun goToDetailsFragment(character : Character){
-        val directions = ApiFragmentDirections.actionToDetails(character)
+        val directions = OnlineCharacterListFragmentDirections.actionToDetails(character)
         findNavController().navigate(directions)
     }
 
@@ -106,10 +106,10 @@ class ApiFragment @Inject constructor(
         viewModel.characters.observe(viewLifecycleOwner) { resource ->
             showProgressBar(false)
             when (resource.status) {
-                ApiStatus.SUCCESS -> {
+                OnlineCharacterListStatus.SUCCESS -> {
                     updateUI(resource.data!!)
                 }
-                ApiStatus.ERROR -> {
+                OnlineCharacterListStatus.ERROR -> {
                     resource.data?.let { updateUI(it) }
                     resource.message?.getContentIfNotHandled()?.let { showMessage(it) }
                 }
@@ -122,9 +122,9 @@ class ApiFragment @Inject constructor(
     }
 
     private fun addToRecyclerView(characters : List<Character>){
-        val items = mutableListOf<ApiCharacterItem>()
+        val items = mutableListOf<OnlineCharacterListItem>()
         characters.forEach {
-            val item = ApiCharacterItem(it, glide)
+            val item = OnlineCharacterListItem(it, glide)
             items.add(item)
         }
         itemAdapter.add(items)

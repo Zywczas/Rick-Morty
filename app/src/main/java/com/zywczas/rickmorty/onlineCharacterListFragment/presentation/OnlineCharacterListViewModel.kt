@@ -1,4 +1,4 @@
-package com.zywczas.rickmorty.apiFragment.presentation
+package com.zywczas.rickmorty.onlineCharacterListFragment.presentation
 
 import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
@@ -7,21 +7,21 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.SessionManager
-import com.zywczas.rickmorty.apiFragment.domain.ApiRepository
+import com.zywczas.rickmorty.onlineCharacterListFragment.domain.OnlineCharacterListRepository
 import com.zywczas.rickmorty.model.Character
-import com.zywczas.rickmorty.apiFragment.utils.ApiResource
+import com.zywczas.rickmorty.onlineCharacterListFragment.utils.OnlineCharacterListResource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class ApiVM @Inject constructor(
-    private val repo: ApiRepository,
+class OnlineCharacterListViewModel @Inject constructor(
+    private val repo: OnlineCharacterListRepository,
     private val session: SessionManager
 ) : ViewModel() {
 
-    private val _characters = MediatorLiveData<ApiResource<List<Character>>>()
-    val characters: LiveData<ApiResource<List<Character>>> = _characters
+    private val _characters = MediatorLiveData<OnlineCharacterListResource>()
+    val characters: LiveData<OnlineCharacterListResource> = _characters
 
     private var page = 1
 
@@ -46,7 +46,7 @@ class ApiVM @Inject constructor(
     }
 
     private fun updateWithError(@StringRes msg: Int) {
-        _characters.postValue(ApiResource.error(msg))
+        _characters.postValue(OnlineCharacterListResource.error(msg))
     }
 
 

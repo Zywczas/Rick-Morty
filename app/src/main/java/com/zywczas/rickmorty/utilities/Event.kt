@@ -1,13 +1,13 @@
-package com.zywczas.rickmorty.apiFragment.utils
+package com.zywczas.rickmorty.utilities
 
 /**
  * Used as a wrapper for data that is exposed via a LiveData that represents an event.
  */
-class ApiEvent<out T> constructor(private val content: T) {
+abstract class Event<out T> constructor(private val content: T) {
 
     private var hasBeenHandled = false
 
-    fun getContentIfNotHandled(): T? {
+    open fun getContentIfNotHandled(): T? {
         return if (hasBeenHandled) {
             null
         } else {

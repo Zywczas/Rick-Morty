@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/destination_Api"
-        android:name="com.zywczas.rickmorty.apiFragment.presentation.ApiFragment"
+        android:name="com.zywczas.rickmorty.onlineCharacterListFragment.presentation.OnlineCharacterListFragment"
         android:label="@string/all_stars"
         tools:layout="@layout/fragment_api">
         <action

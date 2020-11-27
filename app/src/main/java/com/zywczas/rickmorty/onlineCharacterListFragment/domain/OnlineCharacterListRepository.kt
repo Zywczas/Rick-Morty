@@ -1,8 +1,8 @@
-package com.zywczas.rickmorty.apiFragment.domain
+package com.zywczas.rickmorty.onlineCharacterListFragment.domain
 
 import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.model.Character
-import com.zywczas.rickmorty.apiFragment.utils.ApiResource
+import com.zywczas.rickmorty.onlineCharacterListFragment.utils.OnlineCharacterListResource
 import com.zywczas.rickmorty.model.toCharacter
 import com.zywczas.rickmorty.model.webservice.ApiResponse
 import com.zywczas.rickmorty.model.webservice.ApiService
@@ -11,11 +11,11 @@ import com.zywczas.rickmorty.utilities.logD
 import retrofit2.Response
 import javax.inject.Inject
 
-class ApiRepository @Inject constructor(
+class OnlineCharacterListRepository @Inject constructor(
     private val apiService: ApiService
 ) {
 
-    suspend fun downloadCharacters(page: Int): ApiResource<List<Character>> {
+    suspend fun downloadCharacters(page: Int): OnlineCharacterListResource {
         val response = apiService.getCharacters(page)
         return if (response.isSuccessful) {
             returnCharacters(response)
@@ -24,13 +24,13 @@ class ApiRepository @Inject constructor(
         }
     }
 
-    private fun returnCharacters(response: Response<ApiResponse>): ApiResource<List<Character>> {
+    private fun returnCharacters(response: Response<ApiResponse>): OnlineCharacterListResource {
         val charactersFromApi = response.body()?.charactersFromApi
         return if (charactersFromApi != null) {
             val characters = convertToCharacters(charactersFromApi)
-            ApiResource.success(characters)
+            OnlineCharacterListResource.success(characters)
         } else {
-            ApiResource.error(R.string.no_more_pages)
+            OnlineCharacterListResource.error(R.string.no_more_pages)
         }
     }
 
@@ -40,19 +40,19 @@ class ApiRepository @Inject constructor(
         return characters
     }
 
-    private fun returnError(response: Response<ApiResponse>): ApiResource<List<Character>> {
+    private fun returnError(response: Response<ApiResponse>): OnlineCharacterListResource {
         return when (response.code()) {
             in 400..499 -> {
                 logD("Client error: ${response.code()}. ${response.message()}")
-                ApiResource.error(R.string.other_api_error)
+                OnlineCharacterListResource.error(R.string.other_api_error)
             }
             in 500..599 -> {
                 logD("Server error: ${response.code()}. ${response.message()}")
-                ApiResource.error(R.string.other_api_error)
+                OnlineCharacterListResource.error(R.string.other_api_error)
             }
             else -> {
                 logD("${javaClass.name} error: ${response.code()}. ${response.message()}")
-                ApiResource.error(R.string.download_error)
+                OnlineCharacterListResource.error(R.string.download_error)
             }
         }
     }

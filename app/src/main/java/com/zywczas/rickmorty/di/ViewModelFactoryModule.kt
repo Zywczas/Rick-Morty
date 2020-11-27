@@ -1,7 +1,7 @@
 package com.zywczas.rickmorty.di
 
 import androidx.lifecycle.ViewModel
-import com.zywczas.rickmorty.apiFragment.presentation.ApiVM
+import com.zywczas.rickmorty.onlineCharacterListFragment.presentation.OnlineCharacterListViewModel
 import com.zywczas.rickmorty.dbFragment.presentation.DbVM
 import com.zywczas.rickmorty.detailsFragment.presentation.DetailsVM
 import dagger.Binds
@@ -14,15 +14,15 @@ abstract class ViewModelFactoryModule {
     @Binds
     @IntoMap
     @ViewModelKey(DetailsVM::class)
-    abstract fun bindDetailsVM(detailsVM: DetailsVM) : ViewModel
+    abstract fun bindDetailsVM(vm: DetailsVM) : ViewModel
 
     @Binds
     @IntoMap
-    @ViewModelKey(ApiVM::class)
-    abstract fun bindApiVM(apiVM: ApiVM) : ViewModel
+    @ViewModelKey(OnlineCharacterListViewModel::class)
+    abstract fun bindApiVM(vm: OnlineCharacterListViewModel) : ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(DbVM::class)
-    abstract fun bindDbVM(dbVM: DbVM) : ViewModel
+    abstract fun bindDbVM(vm: DbVM) : ViewModel
 }
