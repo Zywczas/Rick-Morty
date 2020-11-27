@@ -14,6 +14,7 @@ import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.utilities.logD
 import com.zywczas.rickmorty.utilities.showToast
 import com.zywczas.rickmorty.factories.UniversalVMFactory
+import com.zywczas.rickmorty.utilities.showSnackbar
 import kotlinx.android.synthetic.main.fragment_details.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -39,8 +40,7 @@ class DetailsFragment @Inject constructor(
     }
 
     private fun showMessage(@StringRes msg :  Int){
-        //todo pozamieniac na alert dialog
-        showToast(getString(msg))
+        showSnackbar(msg)
     }
 
     private fun startUISetupChain(){

@@ -21,6 +21,7 @@ import com.zywczas.rickmorty.model.Character
 import com.zywczas.rickmorty.dbmodule.utils.DbStatus
 import com.zywczas.rickmorty.utilities.showToast
 import com.zywczas.rickmorty.factories.UniversalVMFactory
+import com.zywczas.rickmorty.utilities.showSnackbar
 import kotlinx.android.synthetic.main.fragment_db.*
 import javax.inject.Inject
 
@@ -99,7 +100,7 @@ class DBFragment @Inject constructor (
     }
 
     private fun showMessage(@StringRes msg :  Int){
-        showToast(getString(msg))
+        showSnackbar(msg)
     }
 
     private fun checkConnection(){

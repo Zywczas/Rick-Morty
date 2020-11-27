@@ -24,6 +24,7 @@ import com.zywczas.rickmorty.model.Character
 import com.zywczas.rickmorty.apimodule.utils.ApiStatus
 import com.zywczas.rickmorty.utilities.showToast
 import com.zywczas.rickmorty.factories.UniversalVMFactory
+import com.zywczas.rickmorty.utilities.showSnackbar
 import kotlinx.android.synthetic.main.fragment_api.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -131,7 +132,7 @@ class ApiFragment @Inject constructor(
     }
 
     private fun showMessage(@StringRes msg :  Int){
-        showToast(getString(msg))
+        showSnackbar(msg)
     }
 
 }
