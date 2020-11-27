@@ -16,8 +16,7 @@ import org.reactivestreams.Publisher
 import javax.inject.Inject
 
 class DbRepository @Inject constructor(
-    private val dao: CharacterDao,
-    private val dispatchers : Dispatchers
+    private val dao: CharacterDao
 ) {
 
     fun getCharactersFromDb() : Publisher<DbResource<List<Character>>> =
@@ -27,7 +26,7 @@ class DbRepository @Inject constructor(
                 logD(it)
                 emit(DbResource.error(R.string.other_database_error))
             }
-            .flowOn(dispatchers.IO)
+            .flowOn(Dispatchers.IO)
             .asPublisher()
 
     private fun toCharacters(charactersFromDb : List<CharacterFromDb>) : List<Character>{

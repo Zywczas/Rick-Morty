@@ -13,8 +13,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class DetailsVM @Inject constructor(
-    private val repo: DetailsRepository,
-    private val dispatchers: Dispatchers
+    private val repo: DetailsRepository
 ) : ViewModel() {
 
     private val _isCharacterInFavourites = MediatorLiveData<Boolean>()
@@ -24,13 +23,13 @@ class DetailsVM @Inject constructor(
     val message: LiveData<DetailsEvent<Int>> = _message
 
     suspend fun checkIfIsInList(charId: Int) {
-        withContext(dispatchers.IO) {
+        withContext(Dispatchers.IO) {
             _isCharacterInFavourites.postValue(repo.isCharacterInDb(charId))
         }
     }
 
     suspend fun addOrRemoveCharacterFromFavourites(character: Character, isInFavourites: Boolean) {
-        withContext(dispatchers.IO) {
+        withContext(Dispatchers.IO) {
             when (isInFavourites) {
                 true -> removeCharacterFromFavourites(character)
                 false -> addCharacterToFavourites(character)

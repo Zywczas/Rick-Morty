@@ -17,8 +17,7 @@ import javax.inject.Inject
 
 class ApiVM @Inject constructor(
     private val repo: ApiRepository,
-    private val session: SessionManager,
-    private val dispatchers: Dispatchers
+    private val session: SessionManager
 ) : ViewModel() {
 
     private val _characters = MediatorLiveData<ApiResource<List<Character>>>()
@@ -31,7 +30,7 @@ class ApiVM @Inject constructor(
     }
 
     suspend fun getMoreCharacters() {
-        withContext(dispatchers.IO){
+        withContext(Dispatchers.IO){
             if (session.isConnected) {
                 getNextPage()
             } else {
