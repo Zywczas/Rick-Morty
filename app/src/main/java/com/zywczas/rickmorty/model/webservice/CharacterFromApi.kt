@@ -7,7 +7,7 @@ data class CharacterFromApi (
 
     @SerializedName("id")
     @Expose
-    val id: Int?,
+    val id: Long?,
 
     @SerializedName("name")
     @Expose

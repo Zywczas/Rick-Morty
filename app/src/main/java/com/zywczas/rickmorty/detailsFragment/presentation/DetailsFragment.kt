@@ -12,7 +12,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.RequestManager
 import com.zywczas.rickmorty.R
-import com.zywczas.rickmorty.detailsFragment.DetailsFragmentArgs
 import com.zywczas.rickmorty.utilities.logD
 import com.zywczas.rickmorty.factories.UniversalVMFactory
 import com.zywczas.rickmorty.utilities.showSnackbar

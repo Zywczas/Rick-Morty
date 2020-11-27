@@ -11,7 +11,7 @@ class DetailsRepository @Inject constructor(
     private val dao : CharacterDao
 ) {
 
-    suspend fun isCharacterInDb(charId : Int) : Boolean =
+    suspend fun isCharacterInDb(charId : Long) : Boolean =
          dao.getCount(charId)
              .toBoolean()
 

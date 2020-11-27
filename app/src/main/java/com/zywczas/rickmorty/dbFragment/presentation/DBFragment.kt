@@ -17,7 +17,6 @@ import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
 import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.SessionManager
-import com.zywczas.rickmorty.dbFragment.DBFragmentDirections
 import com.zywczas.rickmorty.dbFragment.adapter.DbCharacterItem
 import com.zywczas.rickmorty.model.Character
 import com.zywczas.rickmorty.dbFragment.utils.DbStatus

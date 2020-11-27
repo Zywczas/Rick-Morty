@@ -19,7 +19,6 @@ import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.scroll.EndlessRecyclerOnScrollListener
 import com.zywczas.rickmorty.R
-import com.zywczas.rickmorty.apiFragment.ApiFragmentDirections
 import com.zywczas.rickmorty.apiFragment.adapter.ApiCharacterItem
 import com.zywczas.rickmorty.model.Character
 import com.zywczas.rickmorty.apiFragment.utils.ApiStatus

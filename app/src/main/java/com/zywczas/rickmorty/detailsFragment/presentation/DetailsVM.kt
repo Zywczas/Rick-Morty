@@ -22,7 +22,7 @@ class DetailsVM @Inject constructor(
     private val _message = MutableLiveData<DetailsEvent<@StringRes Int>>()
     val message: LiveData<DetailsEvent<Int>> = _message
 
-    suspend fun checkIfIsInList(charId: Int) {
+    suspend fun checkIfIsInList(charId: Long) {
         withContext(Dispatchers.IO) {
             _isCharacterInFavourites.postValue(repo.isCharacterInDb(charId))
         }
