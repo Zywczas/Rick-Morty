@@ -3,19 +3,15 @@ package com.zywczas.rickmorty.utilities
 import android.util.Log
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.zywczas.rickmorty.R
 
-fun Fragment.showToast(message: String) =
-    Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
-
+@Suppress("SpellCheckingInspection")
 fun Fragment.showSnackbar(@StringRes msg: Int) {
     val color = ContextCompat.getColor(requireContext(), R.color.darkGrey)
-    @Suppress("SpellCheckingInspection")
     val snackbar = Snackbar.make(requireView(), getString(msg), Snackbar.LENGTH_LONG)
         .setBackgroundTint(color)
     val view = snackbar.view

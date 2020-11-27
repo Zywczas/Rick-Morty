@@ -1,4 +1,4 @@
-package com.zywczas.rickmorty.apimodule.utils
+package com.zywczas.rickmorty.apiFragment.utils
 
 import androidx.annotation.StringRes
 

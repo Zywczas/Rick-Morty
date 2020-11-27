@@ -1,4 +1,4 @@
-package com.zywczas.rickmorty.dbmodule.utils
+package com.zywczas.rickmorty.dbFragment.utils
 
 /**
  * Used as a wrapper for data that is exposed via a LiveData that represents an event.

@@ -1,9 +1,9 @@
 package com.zywczas.rickmorty.di
 
 import androidx.lifecycle.ViewModel
-import com.zywczas.rickmorty.apimodule.ApiVM
-import com.zywczas.rickmorty.dbmodule.DbVM
-import com.zywczas.rickmorty.detailsmodule.DetailsVM
+import com.zywczas.rickmorty.apiFragment.presentation.ApiVM
+import com.zywczas.rickmorty.dbFragment.presentation.DbVM
+import com.zywczas.rickmorty.detailsFragment.presentation.DetailsVM
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

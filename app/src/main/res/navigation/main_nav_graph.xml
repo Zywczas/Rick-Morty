@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/destination_Db"
-        android:name="com.zywczas.rickmorty.dbmodule.DBFragment"
+        android:name="com.zywczas.rickmorty.dbFragment.presentation.DBFragment"
         android:label="@string/my_favourites"
         tools:layout="@layout/fragment_db">
         <action
@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/destination_Api"
-        android:name="com.zywczas.rickmorty.apimodule.ApiFragment"
+        android:name="com.zywczas.rickmorty.apiFragment.presentation.ApiFragment"
         android:label="@string/all_stars"
         tools:layout="@layout/fragment_api">
         <action
@@ -35,7 +35,7 @@
 
     <fragment
         android:id="@+id/destination_Details"
-        android:name="com.zywczas.rickmorty.detailsmodule.DetailsFragment"
+        android:name="com.zywczas.rickmorty.detailsFragment.presentation.DetailsFragment"
         android:label="@string/character_details"
         tools:layout="@layout/fragment_details" >
         <argument

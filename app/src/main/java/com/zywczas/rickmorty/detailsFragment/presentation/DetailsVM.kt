@@ -1,12 +1,13 @@
-package com.zywczas.rickmorty.detailsmodule
+package com.zywczas.rickmorty.detailsFragment.presentation
 
 import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.zywczas.rickmorty.detailsFragment.domain.DetailsRepository
 import com.zywczas.rickmorty.model.Character
-import com.zywczas.rickmorty.detailsmodule.utils.DetailsEvent
+import com.zywczas.rickmorty.detailsFragment.utils.DetailsEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

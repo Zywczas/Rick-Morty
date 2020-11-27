@@ -1,8 +1,8 @@
-package com.zywczas.rickmorty.apimodule
+package com.zywczas.rickmorty.apiFragment.domain
 
 import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.model.Character
-import com.zywczas.rickmorty.apimodule.utils.ApiResource
+import com.zywczas.rickmorty.apiFragment.utils.ApiResource
 import com.zywczas.rickmorty.model.toCharacter
 import com.zywczas.rickmorty.model.webservice.ApiResponse
 import com.zywczas.rickmorty.model.webservice.ApiService

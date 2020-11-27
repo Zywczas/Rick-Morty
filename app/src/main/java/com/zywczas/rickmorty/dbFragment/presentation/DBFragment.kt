@@ -1,4 +1,4 @@
-package com.zywczas.rickmorty.dbmodule
+package com.zywczas.rickmorty.dbFragment.presentation
 
 import android.os.Bundle
 import android.view.View
@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.RequestManager
 import com.mikepenz.fastadapter.FastAdapter
@@ -16,10 +17,10 @@ import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
 import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.SessionManager
-import com.zywczas.rickmorty.adapters.CharacterItem
+import com.zywczas.rickmorty.dbFragment.DBFragmentDirections
+import com.zywczas.rickmorty.dbFragment.adapter.DbCharacterItem
 import com.zywczas.rickmorty.model.Character
-import com.zywczas.rickmorty.dbmodule.utils.DbStatus
-import com.zywczas.rickmorty.utilities.showToast
+import com.zywczas.rickmorty.dbFragment.utils.DbStatus
 import com.zywczas.rickmorty.factories.UniversalVMFactory
 import com.zywczas.rickmorty.utilities.showSnackbar
 import kotlinx.android.synthetic.main.fragment_db.*
@@ -32,7 +33,15 @@ class DBFragment @Inject constructor (
 ) : Fragment(R.layout.fragment_db) {
 
     private val viewModel : DbVM by viewModels { viewModelFactory }
-    private val itemAdapter by lazy { ItemAdapter<CharacterItem>() }
+    private val itemAdapter by lazy { ItemAdapter<DbCharacterItem>() }
+    private val diffUtil by lazy { object : DiffUtil.ItemCallback<DbCharacterItem>() {
+        override fun areItemsTheSame(oldItem: DbCharacterItem, newItem: DbCharacterItem): Boolean {
+            return oldItem.character.id == newItem.character.id
+        }
+        override fun areContentsTheSame(oldItem: DbCharacterItem, newItem: DbCharacterItem): Boolean {
+            return oldItem.character.id == newItem.character.id
+        }
+    } }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -85,12 +94,13 @@ class DBFragment @Inject constructor (
     }
 
     private fun addToRecyclerView(characters : List<Character>, complete: (Boolean) -> Unit){
-        val items = mutableListOf<CharacterItem>()
+        val items = mutableListOf<DbCharacterItem>()
         characters.forEach {
-            val item = CharacterItem(it, glide)
+            val item = DbCharacterItem(it, glide)
             items.add(item)
         }
         //todo to jest do kitu bo przesuwa mi recycler view na poczatek za kazdym razem, no chyba ze FastAdapter moze to gdzies zablokowac
+//        FastAdapterDiffUtil.set(itemAdapter, items, diffUtil)
         FastAdapterDiffUtil[itemAdapter] = items
         complete(true)
     }

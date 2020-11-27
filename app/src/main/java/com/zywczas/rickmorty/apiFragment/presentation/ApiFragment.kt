@@ -1,4 +1,4 @@
-package com.zywczas.rickmorty.apimodule
+package com.zywczas.rickmorty.apiFragment.presentation
 
 import android.content.Context
 import android.content.pm.ActivityInfo
@@ -19,10 +19,10 @@ import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.scroll.EndlessRecyclerOnScrollListener
 import com.zywczas.rickmorty.R
-import com.zywczas.rickmorty.adapters.CharacterItem
+import com.zywczas.rickmorty.apiFragment.ApiFragmentDirections
+import com.zywczas.rickmorty.apiFragment.adapter.ApiCharacterItem
 import com.zywczas.rickmorty.model.Character
-import com.zywczas.rickmorty.apimodule.utils.ApiStatus
-import com.zywczas.rickmorty.utilities.showToast
+import com.zywczas.rickmorty.apiFragment.utils.ApiStatus
 import com.zywczas.rickmorty.factories.UniversalVMFactory
 import com.zywczas.rickmorty.utilities.showSnackbar
 import kotlinx.android.synthetic.main.fragment_api.*
@@ -35,7 +35,7 @@ class ApiFragment @Inject constructor(
 ) : Fragment(R.layout.fragment_api) {
 
     private val viewModel : ApiVM by viewModels { viewModelFactory }
-    private val itemAdapter by lazy { ItemAdapter<CharacterItem>() }
+    private val itemAdapter by lazy { ItemAdapter<ApiCharacterItem>() }
     private val fastAdapter by lazy { FastAdapter.with(itemAdapter) }
 
     override fun onAttach(context: Context) {
@@ -123,9 +123,9 @@ class ApiFragment @Inject constructor(
     }
 
     private fun addToRecyclerView(characters : List<Character>){
-        val items = mutableListOf<CharacterItem>()
+        val items = mutableListOf<ApiCharacterItem>()
         characters.forEach {
-            val item = CharacterItem(it, glide)
+            val item = ApiCharacterItem(it, glide)
             items.add(item)
         }
         itemAdapter.add(items)

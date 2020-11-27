@@ -1,4 +1,4 @@
-package com.zywczas.rickmorty.apimodule
+package com.zywczas.rickmorty.apiFragment.presentation
 
 import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
@@ -7,8 +7,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.SessionManager
+import com.zywczas.rickmorty.apiFragment.domain.ApiRepository
 import com.zywczas.rickmorty.model.Character
-import com.zywczas.rickmorty.apimodule.utils.ApiResource
+import com.zywczas.rickmorty.apiFragment.utils.ApiResource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

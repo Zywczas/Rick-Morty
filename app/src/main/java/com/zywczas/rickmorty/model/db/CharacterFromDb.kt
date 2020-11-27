@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "characters")
 data class CharacterFromDb (
-
+//todo jako long
     @PrimaryKey
     @ColumnInfo(name = "id")
     val id: Int,
