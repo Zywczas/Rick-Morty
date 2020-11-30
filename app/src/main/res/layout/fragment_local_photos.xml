@@ -32,16 +32,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/photoImageView_LocalPhotos" />
 
-        <Button
-            android:id="@+id/createPhotoBtn_LocalPhotos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
-            android:text="Create new photo"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar_localPhotos" />
-
         <ImageView
             android:id="@+id/photoImageView_LocalPhotos"
             android:layout_width="150dp"
@@ -50,6 +40,7 @@
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar_localPhotos"
+            app:srcCompat="@drawable/white_background"
             tools:src="@tools:sample/avatars" />
 
         <Button
@@ -60,7 +51,20 @@
             android:layout_marginEnd="32dp"
             android:text="Save to list"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/createPhotoBtn_LocalPhotos" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_localPhotos" />
+
+        <TextView
+            android:id="@+id/addPhotoTxtView_LocalPhotos"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Click to add a new photo"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/photoImageView_LocalPhotos"
+            app:layout_constraintEnd_toEndOf="@+id/photoImageView_LocalPhotos"
+            app:layout_constraintStart_toStartOf="@+id/photoImageView_LocalPhotos"
+            app:layout_constraintTop_toTopOf="@+id/photoImageView_LocalPhotos" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

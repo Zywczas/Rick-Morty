@@ -12,10 +12,12 @@
     <string name="origin">Origin: %1$s</string>
     <string name="location">Location: %1$s</string>
     <string name="created">Created: %1$s</string>
+    <string name="cancel">Cancel</string>
 
     <!--    UI messages-->
     <string name="browse_characters">Your list is empty. Click All Stars from upper-left corner menu to find your favourite characters.</string>
     <string name="function_not_working">This function is not working correctly. Contact IT service.</string>
+    <string name="permission_warning">Grant access to proceed.</string>
 
     <!--    Web service messages-->
     <string name="no_more_pages">No more pages.</string>
