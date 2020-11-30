@@ -56,7 +56,7 @@ class OnlineCharacterListFragment @Inject constructor(
     private fun setupNavigationUI(){
         val navController = findNavController()
         val appBarConfig =
-            AppBarConfiguration(setOf(R.id.destination_Db, R.id.destination_Api), drawerLayout_onlineCharacterList)
+            AppBarConfiguration(setOf(R.id.destination_LocalCharacterList, R.id.destination_OnlineCharacterList), drawerLayout_onlineCharacterList)
         navDrawer_onlineCharacterList.setupWithNavController(navController)
         toolbar_onlineCharacterList.setupWithNavController(navController, appBarConfig)
     }

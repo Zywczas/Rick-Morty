@@ -45,7 +45,7 @@ class LocalCharacterListFragment @Inject constructor (
     private fun setupNavigationUI(){
         val navController = findNavController()
         val appBarConfig =
-            AppBarConfiguration(setOf(R.id.destination_Db, R.id.destination_Api), drawerLayout_localCharacterList)
+            AppBarConfiguration(setOf(R.id.destination_LocalCharacterList, R.id.destination_OnlineCharacterList), drawerLayout_localCharacterList)
         navDrawer_localCharacterList.setupWithNavController(navController)
         toolbar_localCharacterList.setupWithNavController(navController, appBarConfig)
     }

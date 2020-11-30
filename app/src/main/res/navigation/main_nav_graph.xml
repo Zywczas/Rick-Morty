@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/destination_Db">
+    app:startDestination="@id/destination_LocalCharacterList">
 
     <fragment
-        android:id="@+id/destination_Db"
+        android:id="@+id/destination_LocalCharacterList"
         android:name="com.zywczas.rickmorty.localCharacterListFragment.presentation.LocalCharacterListFragment"
         android:label="@string/my_favourites"
         tools:layout="@layout/fragment_local_character_list">
         <action
             android:id="@+id/actionToDetails"
-            app:destination="@id/destination_Details"
+            app:destination="@id/destination_CharacterDetails"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -20,13 +20,13 @@
     </fragment>
 
     <fragment
-        android:id="@+id/destination_Api"
+        android:id="@+id/destination_OnlineCharacterList"
         android:name="com.zywczas.rickmorty.onlineCharacterListFragment.presentation.OnlineCharacterListFragment"
         android:label="@string/all_stars"
         tools:layout="@layout/fragment_online_character_list">
         <action
             android:id="@+id/actionToDetails"
-            app:destination="@id/destination_Details"
+            app:destination="@id/destination_CharacterDetails"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -34,7 +34,7 @@
     </fragment>
 
     <fragment
-        android:id="@+id/destination_Details"
+        android:id="@+id/destination_CharacterDetails"
         android:name="com.zywczas.rickmorty.characterDetailsFragment.presentation.CharacterDetailsFragment"
         android:label="@string/character_details"
         tools:layout="@layout/fragment_details" >

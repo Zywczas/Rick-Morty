@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/destination_Db"
+        android:id="@+id/destination_LocalCharacterList"
         android:icon="@drawable/star_in_circle_icon"
         android:title="@string/my_favourites" />
 
     <item
-        android:id="@+id/destination_Api"
+        android:id="@+id/destination_OnlineCharacterList"
         android:icon="@android:drawable/ic_menu_search"
         android:title="@string/all_stars" />
 

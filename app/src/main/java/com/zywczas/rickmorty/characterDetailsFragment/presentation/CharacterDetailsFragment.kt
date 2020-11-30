@@ -84,7 +84,7 @@ class CharacterDetailsFragment @Inject constructor(
 
     private fun setupNavigationUI(){
         val appBarConfig =
-            AppBarConfiguration(setOf(R.id.destination_Db, R.id.destination_Api))
+            AppBarConfiguration(setOf(R.id.destination_LocalCharacterList, R.id.destination_OnlineCharacterList))
         toolbar_details.setupWithNavController(findNavController(), appBarConfig)
     }
 
