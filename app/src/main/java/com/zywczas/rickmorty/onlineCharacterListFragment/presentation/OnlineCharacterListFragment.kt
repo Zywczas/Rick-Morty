@@ -2,7 +2,6 @@ package com.zywczas.rickmorty.onlineCharacterListFragment.presentation
 
 import android.content.Context
 import android.content.pm.ActivityInfo
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.StringRes
@@ -24,14 +23,14 @@ import com.zywczas.rickmorty.model.Character
 import com.zywczas.rickmorty.onlineCharacterListFragment.utils.OnlineCharacterListStatus
 import com.zywczas.rickmorty.factories.UniversalViewModelFactory
 import com.zywczas.rickmorty.utilities.showSnackbar
-import kotlinx.android.synthetic.main.fragment_api.*
+import kotlinx.android.synthetic.main.fragment_online_character_list.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class OnlineCharacterListFragment @Inject constructor(
     private val viewModelFactory : UniversalViewModelFactory,
     private val glide : RequestManager
-) : Fragment(R.layout.fragment_api) {
+) : Fragment(R.layout.fragment_online_character_list) {
 
     private val viewModel : OnlineCharacterListViewModel by viewModels { viewModelFactory }
     private val itemAdapter by lazy { ItemAdapter<OnlineCharacterListItem>() }
@@ -51,22 +50,22 @@ class OnlineCharacterListFragment @Inject constructor(
     }
 
     private fun showProgressBar(isVisible : Boolean){
-        progressBar_Api.isVisible = isVisible
+        progressBar_onlineCharacterList.isVisible = isVisible
     }
 
     private fun setupNavigationUI(){
         val navController = findNavController()
         val appBarConfig =
-            AppBarConfiguration(setOf(R.id.destination_Db, R.id.destination_Api), drawerLayout_Api)
-        navDrawer_Api.setupWithNavController(navController)
-        toolbar_Api.setupWithNavController(navController, appBarConfig)
+            AppBarConfiguration(setOf(R.id.destination_Db, R.id.destination_Api), drawerLayout_onlineCharacterList)
+        navDrawer_onlineCharacterList.setupWithNavController(navController)
+        toolbar_onlineCharacterList.setupWithNavController(navController, appBarConfig)
     }
 
     private fun setupRecyclerView(){
         setupRvAdapter()
         setupRvLayoutManager()
         setupRvOnScrollListener()
-        recyclerView_Api.setHasFixedSize(true)
+        recyclerView_onlineCharacterList.setHasFixedSize(true)
     }
 
     private fun setupRvAdapter(){
@@ -74,12 +73,12 @@ class OnlineCharacterListFragment @Inject constructor(
             goToDetailsFragment(item.character)
             false
         }
-        recyclerView_Api.adapter = fastAdapter
+        recyclerView_onlineCharacterList.adapter = fastAdapter
     }
 
     private fun setupRvLayoutManager(){
         val layoutManager = GridLayoutManager(requireContext(), 2)
-        recyclerView_Api.layoutManager = layoutManager
+        recyclerView_onlineCharacterList.layoutManager = layoutManager
     }
 
     private fun setupRvOnScrollListener(){
@@ -89,7 +88,7 @@ class OnlineCharacterListFragment @Inject constructor(
                 lifecycleScope.launch { viewModel.getMoreCharacters() }
             }
         }
-        recyclerView_Api.addOnScrollListener(onScrollListener)
+        recyclerView_onlineCharacterList.addOnScrollListener(onScrollListener)
     }
 
     private fun goToDetailsFragment(character : Character){

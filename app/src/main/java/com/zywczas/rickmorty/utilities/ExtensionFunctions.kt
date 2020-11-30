@@ -28,3 +28,4 @@ fun logD(e : Throwable) = Log.d(tag, "${e.message}")
 //todo dac wczytywanie zdjec z kamery
 //todo spawdzic czy diff util w LocalCharacterListFragment da sie ustawic tak zeby nie przeskakiwal na poczatek listy
 //todo pozmieniac nazwy layoutow
+//todo zmienic nav graph i destinations, oraz w menu
