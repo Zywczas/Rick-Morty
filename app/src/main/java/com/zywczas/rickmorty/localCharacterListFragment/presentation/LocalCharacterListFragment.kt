@@ -1,5 +1,6 @@
 package com.zywczas.rickmorty.localCharacterListFragment.presentation
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.StringRes
@@ -9,7 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.RequestManager
 import com.mikepenz.fastadapter.FastAdapter
@@ -20,13 +20,13 @@ import com.zywczas.rickmorty.SessionManager
 import com.zywczas.rickmorty.localCharacterListFragment.adapter.LocalCharacterListItem
 import com.zywczas.rickmorty.model.Character
 import com.zywczas.rickmorty.localCharacterListFragment.utils.LocalCharacterListStatus
-import com.zywczas.rickmorty.factories.UniversalVMFactory
+import com.zywczas.rickmorty.factories.UniversalViewModelFactory
 import com.zywczas.rickmorty.utilities.showSnackbar
 import kotlinx.android.synthetic.main.fragment_db.*
 import javax.inject.Inject
 
 class LocalCharacterListFragment @Inject constructor (
-    private val viewModelFactory: UniversalVMFactory,
+    private val viewModelFactory: UniversalViewModelFactory,
     private val glide: RequestManager,
     private val session: SessionManager
 ) : Fragment(R.layout.fragment_db) {
@@ -51,15 +51,28 @@ class LocalCharacterListFragment @Inject constructor (
     }
 
     private fun setupRecyclerView(){
+        setupRvAdapter()
+        setupRvLayoutManager()
+        recyclerView_Db.setHasFixedSize(true)
+    }
+
+    private fun setupRvAdapter(){
         val fastAdapter = FastAdapter.with(itemAdapter)
         fastAdapter.onClickListener = { _, _, item, _ ->
             goToDetailsFragment(item.character)
             false
         }
         recyclerView_Db.adapter = fastAdapter
-        val layoutManager = GridLayoutManager(requireContext(), 2)
+    }
+
+    private fun setupRvLayoutManager(){
+        var spanCount = 2
+        val orientation = resources.configuration.orientation
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE){
+            spanCount = 4
+        }
+        val layoutManager = GridLayoutManager(requireContext(), spanCount)
         recyclerView_Db.layoutManager = layoutManager
-        recyclerView_Db.setHasFixedSize(true)
     }
 
     private fun goToDetailsFragment(character : Character){
@@ -90,8 +103,6 @@ class LocalCharacterListFragment @Inject constructor (
             val item = LocalCharacterListItem(it, glide)
             items.add(item)
         }
-        //todo to jest do kitu bo przesuwa mi recycler view na poczatek za kazdym razem, no chyba ze FastAdapter moze to gdzies zablokowac
-//        FastAdapterDiffUtil.set(itemAdapter, items, diffUtil)
         FastAdapterDiffUtil[itemAdapter] = items
         complete(true)
     }

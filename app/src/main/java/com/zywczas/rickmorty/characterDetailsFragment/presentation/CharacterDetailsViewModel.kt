@@ -1,19 +1,19 @@
-package com.zywczas.rickmorty.detailsFragment.presentation
+package com.zywczas.rickmorty.characterDetailsFragment.presentation
 
 import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.zywczas.rickmorty.detailsFragment.domain.DetailsRepository
+import com.zywczas.rickmorty.characterDetailsFragment.domain.CharacterDetailsRepository
 import com.zywczas.rickmorty.model.Character
-import com.zywczas.rickmorty.detailsFragment.utils.DetailsEvent
+import com.zywczas.rickmorty.characterDetailsFragment.utils.DetailsEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class DetailsVM @Inject constructor(
-    private val repo: DetailsRepository
+class CharacterDetailsViewModel @Inject constructor(
+    private val repo: CharacterDetailsRepository
 ) : ViewModel() {
 
     private val _isCharacterInFavourites = MediatorLiveData<Boolean>()

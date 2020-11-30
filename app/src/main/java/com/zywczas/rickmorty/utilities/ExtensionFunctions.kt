@@ -26,3 +26,5 @@ fun logD(e : Throwable) = Log.d(tag, "${e.message}")
 
 //todo dodac pagination w DB module
 //todo dac wczytywanie zdjec z kamery
+//todo spawdzic czy diff util w LocalCharacterListFragment da sie ustawic tak zeby nie przeskakiwal na poczatek listy
+//todo pozmieniac nazwy layoutow

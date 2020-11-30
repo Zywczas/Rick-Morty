@@ -35,7 +35,7 @@
 
     <fragment
         android:id="@+id/destination_Details"
-        android:name="com.zywczas.rickmorty.detailsFragment.presentation.DetailsFragment"
+        android:name="com.zywczas.rickmorty.characterDetailsFragment.presentation.CharacterDetailsFragment"
         android:label="@string/character_details"
         tools:layout="@layout/fragment_details" >
         <argument

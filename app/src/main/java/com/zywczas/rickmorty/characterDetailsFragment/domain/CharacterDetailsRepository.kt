@@ -1,13 +1,13 @@
-package com.zywczas.rickmorty.detailsFragment.domain
+package com.zywczas.rickmorty.characterDetailsFragment.domain
 
 import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.model.Character
 import com.zywczas.rickmorty.model.db.CharacterDao
-import com.zywczas.rickmorty.detailsFragment.utils.DetailsEvent
+import com.zywczas.rickmorty.characterDetailsFragment.utils.DetailsEvent
 import com.zywczas.rickmorty.model.toCharacterFromDb
 import javax.inject.Inject
 
-class DetailsRepository @Inject constructor(
+class CharacterDetailsRepository @Inject constructor(
     private val dao : CharacterDao
 ) {
 

@@ -3,7 +3,7 @@ package com.zywczas.rickmorty.di
 import androidx.lifecycle.ViewModel
 import com.zywczas.rickmorty.onlineCharacterListFragment.presentation.OnlineCharacterListViewModel
 import com.zywczas.rickmorty.localCharacterListFragment.presentation.LocalCharacterListViewModel
-import com.zywczas.rickmorty.detailsFragment.presentation.DetailsVM
+import com.zywczas.rickmorty.characterDetailsFragment.presentation.CharacterDetailsViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -13,8 +13,8 @@ abstract class ViewModelFactoryModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(DetailsVM::class)
-    abstract fun bindDetailsVM(vm: DetailsVM) : ViewModel
+    @ViewModelKey(CharacterDetailsViewModel::class)
+    abstract fun bindDetailsVM(vm: CharacterDetailsViewModel) : ViewModel
 
     @Binds
     @IntoMap

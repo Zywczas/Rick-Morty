@@ -1,4 +1,4 @@
-package com.zywczas.rickmorty.detailsFragment.presentation
+package com.zywczas.rickmorty.characterDetailsFragment.presentation
 
 import android.os.Bundle
 import android.view.View
@@ -13,19 +13,19 @@ import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.RequestManager
 import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.utilities.logD
-import com.zywczas.rickmorty.factories.UniversalVMFactory
+import com.zywczas.rickmorty.factories.UniversalViewModelFactory
 import com.zywczas.rickmorty.utilities.showSnackbar
 import kotlinx.android.synthetic.main.fragment_details.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class DetailsFragment @Inject constructor(
+class CharacterDetailsFragment @Inject constructor(
     private val glide : RequestManager,
-    private val viewModelFactory : UniversalVMFactory
+    private val viewModelFactory : UniversalViewModelFactory
 ) : Fragment(R.layout.fragment_details) {
 
-    private val viewModel : DetailsVM by viewModels { viewModelFactory }
-    private val args : DetailsFragmentArgs by navArgs()
+    private val viewModel : CharacterDetailsViewModel by viewModels { viewModelFactory }
+    private val args : CharacterDetailsFragmentArgs by navArgs()
     private val character by lazy { args.character }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -22,14 +22,14 @@ import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.onlineCharacterListFragment.adapter.OnlineCharacterListItem
 import com.zywczas.rickmorty.model.Character
 import com.zywczas.rickmorty.onlineCharacterListFragment.utils.OnlineCharacterListStatus
-import com.zywczas.rickmorty.factories.UniversalVMFactory
+import com.zywczas.rickmorty.factories.UniversalViewModelFactory
 import com.zywczas.rickmorty.utilities.showSnackbar
 import kotlinx.android.synthetic.main.fragment_api.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class OnlineCharacterListFragment @Inject constructor(
-    private val viewModelFactory : UniversalVMFactory,
+    private val viewModelFactory : UniversalViewModelFactory,
     private val glide : RequestManager
 ) : Fragment(R.layout.fragment_api) {
 
@@ -78,12 +78,7 @@ class OnlineCharacterListFragment @Inject constructor(
     }
 
     private fun setupRvLayoutManager(){
-        var spanCount = 2
-        val orientation = resources.configuration.orientation
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE){
-            spanCount = 4
-        }
-        val layoutManager = GridLayoutManager(requireContext(), spanCount)
+        val layoutManager = GridLayoutManager(requireContext(), 2)
         recyclerView_Api.layoutManager = layoutManager
     }
 

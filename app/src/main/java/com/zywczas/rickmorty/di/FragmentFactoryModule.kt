@@ -3,7 +3,7 @@ package com.zywczas.rickmorty.di
 import androidx.fragment.app.Fragment
 import com.zywczas.rickmorty.onlineCharacterListFragment.presentation.OnlineCharacterListFragment
 import com.zywczas.rickmorty.localCharacterListFragment.presentation.LocalCharacterListFragment
-import com.zywczas.rickmorty.detailsFragment.presentation.DetailsFragment
+import com.zywczas.rickmorty.characterDetailsFragment.presentation.CharacterDetailsFragment
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -23,7 +23,7 @@ abstract class FragmentFactoryModule {
 
     @Binds
     @IntoMap
-    @FragmentKey(DetailsFragment::class)
-    abstract fun bindDetailsFragment(fragment: DetailsFragment) : Fragment
+    @FragmentKey(CharacterDetailsFragment::class)
+    abstract fun bindDetailsFragment(fragment: CharacterDetailsFragment) : Fragment
 
 }
