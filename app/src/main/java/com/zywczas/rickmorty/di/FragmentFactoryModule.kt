@@ -2,7 +2,7 @@ package com.zywczas.rickmorty.di
 
 import androidx.fragment.app.Fragment
 import com.zywczas.rickmorty.onlineCharacterListFragment.presentation.OnlineCharacterListFragment
-import com.zywczas.rickmorty.dbFragment.presentation.DBFragment
+import com.zywczas.rickmorty.localCharacterListFragment.presentation.LocalCharacterListFragment
 import com.zywczas.rickmorty.detailsFragment.presentation.DetailsFragment
 import dagger.Binds
 import dagger.Module
@@ -13,8 +13,8 @@ abstract class FragmentFactoryModule {
 
     @Binds
     @IntoMap
-    @FragmentKey(DBFragment::class)
-    abstract fun bindDBFragment(fragment: DBFragment) : Fragment
+    @FragmentKey(LocalCharacterListFragment::class)
+    abstract fun bindDBFragment(fragment: LocalCharacterListFragment) : Fragment
 
     @Binds
     @IntoMap

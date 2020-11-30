@@ -1,10 +1,10 @@
-package com.zywczas.rickmorty.dbFragment.domain
+package com.zywczas.rickmorty.localCharacterListFragment.domain
 
 import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.model.Character
 import com.zywczas.rickmorty.model.db.CharacterDao
 import com.zywczas.rickmorty.model.db.CharacterFromDb
-import com.zywczas.rickmorty.dbFragment.utils.DbResource
+import com.zywczas.rickmorty.localCharacterListFragment.utils.LocalCharacterListResource
 import com.zywczas.rickmorty.model.toCharacter
 import com.zywczas.rickmorty.utilities.logD
 import kotlinx.coroutines.Dispatchers
@@ -15,16 +15,16 @@ import kotlinx.coroutines.reactive.asPublisher
 import org.reactivestreams.Publisher
 import javax.inject.Inject
 
-class DbRepository @Inject constructor(
+class LocalCharacterListRepository @Inject constructor(
     private val dao: CharacterDao
 ) {
 
-    fun getCharactersFromDb() : Publisher<DbResource<List<Character>>> =
+    fun getCharactersFromDb() : Publisher<LocalCharacterListResource> =
         dao.getCharacters()
-            .map { DbResource.success(toCharacters(it)) }
+            .map { LocalCharacterListResource.success(toCharacters(it)) }
             .catch {
                 logD(it)
-                emit(DbResource.error(R.string.other_database_error))
+                emit(LocalCharacterListResource.error(R.string.other_database_error))
             }
             .flowOn(Dispatchers.IO)
             .asPublisher()
