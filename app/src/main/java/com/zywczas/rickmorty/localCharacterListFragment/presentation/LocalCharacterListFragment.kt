@@ -22,14 +22,14 @@ import com.zywczas.rickmorty.model.Character
 import com.zywczas.rickmorty.localCharacterListFragment.utils.LocalCharacterListStatus
 import com.zywczas.rickmorty.factories.UniversalViewModelFactory
 import com.zywczas.rickmorty.utilities.showSnackbar
-import kotlinx.android.synthetic.main.fragment_db.*
+import kotlinx.android.synthetic.main.fragment_local_character_list.*
 import javax.inject.Inject
 
 class LocalCharacterListFragment @Inject constructor (
     private val viewModelFactory: UniversalViewModelFactory,
     private val glide: RequestManager,
     private val session: SessionManager
-) : Fragment(R.layout.fragment_db) {
+) : Fragment(R.layout.fragment_local_character_list) {
 
     private val viewModel : LocalCharacterListViewModel by viewModels { viewModelFactory }
     private val itemAdapter by lazy { ItemAdapter<LocalCharacterListItem>() }
@@ -45,15 +45,15 @@ class LocalCharacterListFragment @Inject constructor (
     private fun setupNavigationUI(){
         val navController = findNavController()
         val appBarConfig =
-            AppBarConfiguration(setOf(R.id.destination_Db, R.id.destination_Api), drawerLayout_Db)
-        navDrawer_Db.setupWithNavController(navController)
-        toolbar_Db.setupWithNavController(navController, appBarConfig)
+            AppBarConfiguration(setOf(R.id.destination_Db, R.id.destination_Api), drawerLayout_localCharacterList)
+        navDrawer_localCharacterList.setupWithNavController(navController)
+        toolbar_localCharacterList.setupWithNavController(navController, appBarConfig)
     }
 
     private fun setupRecyclerView(){
         setupRvAdapter()
         setupRvLayoutManager()
-        recyclerView_Db.setHasFixedSize(true)
+        recyclerView_localCharacterList.setHasFixedSize(true)
     }
 
     private fun setupRvAdapter(){
@@ -62,7 +62,7 @@ class LocalCharacterListFragment @Inject constructor (
             goToDetailsFragment(item.character)
             false
         }
-        recyclerView_Db.adapter = fastAdapter
+        recyclerView_localCharacterList.adapter = fastAdapter
     }
 
     private fun setupRvLayoutManager(){
@@ -72,7 +72,7 @@ class LocalCharacterListFragment @Inject constructor (
             spanCount = 4
         }
         val layoutManager = GridLayoutManager(requireContext(), spanCount)
-        recyclerView_Db.layoutManager = layoutManager
+        recyclerView_localCharacterList.layoutManager = layoutManager
     }
 
     private fun goToDetailsFragment(character : Character){
@@ -108,7 +108,7 @@ class LocalCharacterListFragment @Inject constructor (
     }
 
     private fun updateInfoAboutEmptyDb(){
-        emptyList_TextView_Db.isVisible = itemAdapter.itemList.isEmpty
+        emptyList_TextView_localCharacterList.isVisible = itemAdapter.itemList.isEmpty
     }
 
     private fun showMessage(@StringRes msg :  Int){

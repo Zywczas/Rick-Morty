@@ -9,7 +9,7 @@
         android:id="@+id/destination_Db"
         android:name="com.zywczas.rickmorty.localCharacterListFragment.presentation.LocalCharacterListFragment"
         android:label="@string/my_favourites"
-        tools:layout="@layout/fragment_db">
+        tools:layout="@layout/fragment_local_character_list">
         <action
             android:id="@+id/actionToDetails"
             app:destination="@id/destination_Details"

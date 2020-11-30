@@ -2,12 +2,10 @@ package com.zywczas.rickmorty.characterDetailsFragment.presentation
 
 import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.zywczas.rickmorty.characterDetailsFragment.domain.CharacterDetailsRepository
 import com.zywczas.rickmorty.model.Character
-import com.zywczas.rickmorty.characterDetailsFragment.utils.DetailsEvent
 import com.zywczas.rickmorty.utilities.SingleLiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
