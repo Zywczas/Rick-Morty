@@ -15,9 +15,7 @@ import kotlinx.coroutines.reactive.asPublisher
 import org.reactivestreams.Publisher
 import javax.inject.Inject
 
-class LocalCharacterListRepository @Inject constructor(
-    private val dao: CharacterDao
-) {
+class LocalCharacterListRepository @Inject constructor(private val dao: CharacterDao) {
 
     fun getCharactersFromDb() : Publisher<LocalCharacterListResource> =
         dao.getCharacters()

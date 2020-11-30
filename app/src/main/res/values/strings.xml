@@ -27,10 +27,8 @@
 
     <!--    Database messages-->
     <string name="id_count_verify_error">Problem with verifying the character in Favourites. Go back and try again.</string>
-    <string name="insert_character_error">Couldn\'t add the character. Go back and try again.</string>
-    <string name="insert_character_success">Character added to the Favourites.</string>
-    <string name="delete_character_success">Character removed from the Favourites.</string>
-    <string name="delete_character_error">Couldn\'t remove the character. Go back and try again.</string>
+    <string name="action_error">Operation failure. Try again or contact IT service.</string>
+    <string name="action_success">Operation success.</string>
     <string name="other_database_error">Database error. Contact IT service.</string>
 
 

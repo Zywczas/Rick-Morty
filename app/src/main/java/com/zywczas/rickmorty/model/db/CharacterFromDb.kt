@@ -32,7 +32,7 @@ data class CharacterFromDb (
     @ColumnInfo(name = "location")
     val location: String,
 
-    @ColumnInfo(name = "imageUrl")
+    @ColumnInfo(name = "image_url")
     val imageUrl: String?,
 
     @ColumnInfo(name = "created")
