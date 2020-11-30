@@ -16,7 +16,7 @@ class CharacterDetailsViewModel @Inject constructor(
     private val repo: CharacterDetailsRepository
 ) : ViewModel() {
 
-    private val _isCharacterInFavourites = MediatorLiveData<Boolean>()
+    private val _isCharacterInFavourites = MutableLiveData<Boolean>()
     val isCharacterInFavourites: LiveData<Boolean> = _isCharacterInFavourites
 
     private val _message = MutableLiveData<DetailsEvent<@StringRes Int>>()
