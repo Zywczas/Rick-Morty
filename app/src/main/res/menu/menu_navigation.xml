@@ -11,4 +11,9 @@
         android:icon="@android:drawable/ic_menu_search"
         android:title="@string/all_stars" />
 
+    <item
+        android:id="@+id/destination_LocalPhotosFragment"
+        android:icon="@android:drawable/ic_menu_camera"
+        android:title="@string/your_saved_photos" />
+
 </menu>

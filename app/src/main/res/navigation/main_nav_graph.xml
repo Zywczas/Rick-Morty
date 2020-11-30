@@ -42,4 +42,9 @@
             android:name="character"
             app:argType="com.zywczas.rickmorty.model.Character" />
     </fragment>
+    <fragment
+        android:id="@+id/destination_LocalPhotosFragment"
+        android:name="com.zywczas.rickmorty.localPhotos.presentation.LocalPhotosFragment"
+        android:label="@string/your_saved_photos"
+        tools:layout="@layout/fragment_local_photos" />
 </navigation>

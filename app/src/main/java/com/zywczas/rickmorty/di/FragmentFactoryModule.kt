@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import com.zywczas.rickmorty.onlineCharacterListFragment.presentation.OnlineCharacterListFragment
 import com.zywczas.rickmorty.localCharacterListFragment.presentation.LocalCharacterListFragment
 import com.zywczas.rickmorty.characterDetailsFragment.presentation.CharacterDetailsFragment
+import com.zywczas.rickmorty.localPhotos.presentation.LocalPhotosFragment
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -25,5 +26,10 @@ abstract class FragmentFactoryModule {
     @IntoMap
     @FragmentKey(CharacterDetailsFragment::class)
     abstract fun bindDetailsFragment(fragment: CharacterDetailsFragment) : Fragment
+
+    @Binds
+    @IntoMap
+    @FragmentKey(LocalPhotosFragment::class)
+    abstract fun bindDetailsFragment(fragment: LocalPhotosFragment) : Fragment
 
 }
