@@ -30,5 +30,4 @@ fun mainAppBarConfiguration(drawer : Openable? = null) = AppBarConfiguration(set
 R.id.destination_LocalPhotosFragment), drawer)
 
 //todo dodac pagination w DB module
-//todo dac wczytywanie zdjec z kamery
 //todo spawdzic czy diff util w LocalCharacterListFragment da sie ustawic tak zeby nie przeskakiwal na poczatek listy

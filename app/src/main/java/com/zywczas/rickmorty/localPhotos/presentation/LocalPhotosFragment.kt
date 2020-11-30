@@ -6,7 +6,6 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
@@ -15,12 +14,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.utilities.mainAppBarConfiguration
 import com.zywczas.rickmorty.utilities.showSnackbar
-import kotlinx.android.synthetic.main.fragment_local_character_list.*
 import kotlinx.android.synthetic.main.fragment_local_photos.*
 import javax.inject.Inject
 
@@ -77,26 +74,24 @@ class LocalPhotosFragment @Inject constructor() : Fragment(R.layout.fragment_loc
     private fun checkCameraPermissionAndTakePhoto(){
         if (ContextCompat.checkSelfPermission(requireContext().applicationContext, cameraPermission[0]) ==
             PackageManager.PERMISSION_GRANTED){
-            takePhotoAndSendToRequestorOnActivityResult()
+            takePhotoAndDisplayOnActivityResult()
         } else {
-            askForCameraPermissionAndTakePhotoOnPermissionResult()
+            getCameraPermissionAndTakePhotoOnPermissionResult()
         }
     }
 
-    private fun takePhotoAndSendToRequestorOnActivityResult(){
+    private fun takePhotoAndDisplayOnActivityResult(){
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         startActivityForResult(cameraIntent, cameraRequestCode)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == cameraRequestCode && resultCode == Activity.RESULT_OK){
-            //todo pozniej zamienic na temp file i uri
             val bitmap = data?.extras?.get("data") as? Bitmap
             bitmap?.let {
                 photoImageView_LocalPhotos.setImageBitmap(it)
                 addPhotoTxtView_LocalPhotos.isVisible = false
             }
-//            dismiss()
         } else if (requestCode == storageRequestCode && resultCode == Activity.RESULT_OK){
             val selectedImageUri = data?.data
             selectedImageUri?.let {
@@ -106,7 +101,7 @@ class LocalPhotosFragment @Inject constructor() : Fragment(R.layout.fragment_loc
         }
     }
 
-    private fun askForCameraPermissionAndTakePhotoOnPermissionResult(){
+    private fun getCameraPermissionAndTakePhotoOnPermissionResult(){
         requestPermissions(cameraPermission, cameraRequestCode)
     }
 
@@ -118,18 +113,16 @@ class LocalPhotosFragment @Inject constructor() : Fragment(R.layout.fragment_loc
         when(requestCode) {
             cameraRequestCode -> {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    takePhotoAndSendToRequestorOnActivityResult()
+                    takePhotoAndDisplayOnActivityResult()
                 } else {
                     showSnackbar(R.string.permission_warning)
-//                    dismiss()
                 }
             }
             storageRequestCode -> {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    getImageFromGalleryAndSendToRequestorOnActivityResult()
+                    getImageFromGalleryAndDisplayOnActivityResult()
                 } else {
                     showSnackbar(R.string.permission_warning)
-//                    dismiss()
                 }
             }
         }
@@ -139,19 +132,19 @@ class LocalPhotosFragment @Inject constructor() : Fragment(R.layout.fragment_loc
         if (ContextCompat.checkSelfPermission(requireContext(),storagePermissions[0]) == PackageManager.PERMISSION_GRANTED &&
             ContextCompat.checkSelfPermission(requireContext(),storagePermissions[1]) == PackageManager.PERMISSION_GRANTED
         ){
-            getImageFromGalleryAndSendToRequestorOnActivityResult()
+            getImageFromGalleryAndDisplayOnActivityResult()
         } else {
-            askForStoragePermissionAndGetImageOnPermissionResult()
+            getStoragePermissionAndDisplayImageOnPermissionResult()
         }
     }
 
-    private fun getImageFromGalleryAndSendToRequestorOnActivityResult(){
+    private fun getImageFromGalleryAndDisplayOnActivityResult(){
         val storageIntent = Intent(Intent.ACTION_GET_CONTENT)
         storageIntent.type = "image/*"
         startActivityForResult(storageIntent, storageRequestCode)
     }
 
-    private fun askForStoragePermissionAndGetImageOnPermissionResult(){
+    private fun getStoragePermissionAndDisplayImageOnPermissionResult(){
         requestPermissions(storagePermissions, storageRequestCode)
     }
 

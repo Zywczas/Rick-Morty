@@ -82,7 +82,6 @@ class SaveImageDialog : DialogFragment(){
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == cameraRequestCode && resultCode == Activity.RESULT_OK){
-            //todo pozniej zamienic na temp file i uri
             val bitmap = data?.extras?.get("data") as? Bitmap
             bitmap?.let { onPhotoReceivedListener.getImageBitmap(it) }
             dismiss()
