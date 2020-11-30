@@ -1,10 +1,10 @@
 package com.zywczas.rickmorty.localCharacterListFragment.domain
 
 import com.zywczas.rickmorty.R
+import com.zywczas.rickmorty.localCharacterListFragment.utils.*
 import com.zywczas.rickmorty.model.Character
 import com.zywczas.rickmorty.model.db.CharacterDao
 import com.zywczas.rickmorty.model.db.CharacterFromDb
-import com.zywczas.rickmorty.localCharacterListFragment.utils.LocalCharacterListResource
 import com.zywczas.rickmorty.model.toCharacter
 import com.zywczas.rickmorty.utilities.logD
 import kotlinx.coroutines.Dispatchers
