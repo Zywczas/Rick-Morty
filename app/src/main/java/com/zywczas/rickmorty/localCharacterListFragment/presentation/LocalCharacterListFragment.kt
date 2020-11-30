@@ -21,8 +21,10 @@ import com.zywczas.rickmorty.localCharacterListFragment.adapter.LocalCharacterLi
 import com.zywczas.rickmorty.model.Character
 import com.zywczas.rickmorty.localCharacterListFragment.utils.LocalCharacterListStatus
 import com.zywczas.rickmorty.factories.UniversalViewModelFactory
+import com.zywczas.rickmorty.utilities.mainAppBarConfiguration
 import com.zywczas.rickmorty.utilities.showSnackbar
 import kotlinx.android.synthetic.main.fragment_local_character_list.*
+import kotlinx.android.synthetic.main.fragment_local_photos.*
 import javax.inject.Inject
 
 class LocalCharacterListFragment @Inject constructor (
@@ -44,9 +46,7 @@ class LocalCharacterListFragment @Inject constructor (
 
     private fun setupNavigationUI(){
         val navController = findNavController()
-        val appBarConfig =
-            AppBarConfiguration(setOf(R.id.destination_LocalCharacterList, R.id.destination_OnlineCharacterList,
-                R.id.destination_LocalPhotosFragment), drawerLayout_localCharacterList)
+        val appBarConfig = mainAppBarConfiguration(drawerLayout_localCharacterList)
         navDrawer_localCharacterList.setupWithNavController(navController)
         toolbar_localCharacterList.setupWithNavController(navController, appBarConfig)
     }

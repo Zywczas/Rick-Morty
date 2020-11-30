@@ -14,15 +14,15 @@ abstract class ViewModelFactoryModule {
     @Binds
     @IntoMap
     @ViewModelKey(CharacterDetailsViewModel::class)
-    abstract fun bindDetailsVM(vm: CharacterDetailsViewModel) : ViewModel
+    abstract fun bindCharacterDetailsViewModel(vm: CharacterDetailsViewModel) : ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(OnlineCharacterListViewModel::class)
-    abstract fun bindApiVM(vm: OnlineCharacterListViewModel) : ViewModel
+    abstract fun bindOnlineCharacterListViewModel(vm: OnlineCharacterListViewModel) : ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(LocalCharacterListViewModel::class)
-    abstract fun bindDbVM(vm: LocalCharacterListViewModel) : ViewModel
+    abstract fun bindLocalCharacterListViewModel(vm: LocalCharacterListViewModel) : ViewModel
 }

@@ -14,6 +14,7 @@ import com.bumptech.glide.RequestManager
 import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.utilities.logD
 import com.zywczas.rickmorty.factories.UniversalViewModelFactory
+import com.zywczas.rickmorty.utilities.mainAppBarConfiguration
 import com.zywczas.rickmorty.utilities.showSnackbar
 import kotlinx.android.synthetic.main.fragment_details.*
 import kotlinx.coroutines.launch
@@ -83,8 +84,7 @@ class CharacterDetailsFragment @Inject constructor(
     }
 
     private fun setupNavigationUI(){
-        val appBarConfig =
-            AppBarConfiguration(setOf(R.id.destination_LocalCharacterList, R.id.destination_OnlineCharacterList))
+        val appBarConfig = mainAppBarConfiguration()
         toolbar_details.setupWithNavController(findNavController(), appBarConfig)
     }
 

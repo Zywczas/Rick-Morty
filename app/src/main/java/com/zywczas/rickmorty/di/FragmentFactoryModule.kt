@@ -15,21 +15,21 @@ abstract class FragmentFactoryModule {
     @Binds
     @IntoMap
     @FragmentKey(LocalCharacterListFragment::class)
-    abstract fun bindDBFragment(fragment: LocalCharacterListFragment) : Fragment
+    abstract fun bindLocalCharacterListFragment(fragment: LocalCharacterListFragment) : Fragment
 
     @Binds
     @IntoMap
     @FragmentKey(OnlineCharacterListFragment::class)
-    abstract fun bindApiFragment(fragment: OnlineCharacterListFragment) : Fragment
+    abstract fun bindOnlineCharacterListFragment(fragment: OnlineCharacterListFragment) : Fragment
 
     @Binds
     @IntoMap
     @FragmentKey(CharacterDetailsFragment::class)
-    abstract fun bindDetailsFragment(fragment: CharacterDetailsFragment) : Fragment
+    abstract fun bindCharacterDetailsFragment(fragment: CharacterDetailsFragment) : Fragment
 
     @Binds
     @IntoMap
     @FragmentKey(LocalPhotosFragment::class)
-    abstract fun bindDetailsFragment(fragment: LocalPhotosFragment) : Fragment
+    abstract fun bindLocalPhotosFragment(fragment: LocalPhotosFragment) : Fragment
 
 }

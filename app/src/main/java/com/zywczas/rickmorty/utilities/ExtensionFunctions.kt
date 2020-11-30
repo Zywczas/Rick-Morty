@@ -5,7 +5,9 @@ import android.view.View
 import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
+import androidx.customview.widget.Openable
 import androidx.fragment.app.Fragment
+import androidx.navigation.ui.AppBarConfiguration
 import com.google.android.material.snackbar.Snackbar
 import com.zywczas.rickmorty.R
 
@@ -23,6 +25,9 @@ fun Fragment.showSnackbar(@StringRes msg: Int) {
 private const val tag = "RickAndMorty"
 fun logD(msg : String) = Log.d(tag, msg)
 fun logD(e : Throwable) = Log.d(tag, "${e.message}")
+
+fun mainAppBarConfiguration(drawer : Openable? = null) = AppBarConfiguration(setOf(R.id.destination_LocalCharacterList, R.id.destination_OnlineCharacterList,
+R.id.destination_LocalPhotosFragment), drawer)
 
 //todo dodac pagination w DB module
 //todo dac wczytywanie zdjec z kamery
