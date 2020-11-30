@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.zywczas.rickmorty.characterDetailsFragment.domain.CharacterDetailsRepository
 import com.zywczas.rickmorty.model.Character
 import com.zywczas.rickmorty.characterDetailsFragment.utils.DetailsEvent
+import com.zywczas.rickmorty.utilities.SingleLiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -19,8 +20,8 @@ class CharacterDetailsViewModel @Inject constructor(
     private val _isCharacterInFavourites = MutableLiveData<Boolean>()
     val isCharacterInFavourites: LiveData<Boolean> = _isCharacterInFavourites
 
-    private val _message = MutableLiveData<DetailsEvent<@StringRes Int>>()
-    val message: LiveData<DetailsEvent<Int>> = _message
+    private val _message = SingleLiveData<@StringRes Int>()
+    val message: LiveData<Int> = _message
 
     suspend fun checkIfIsInList(charId: Long) {
         withContext(Dispatchers.IO) {

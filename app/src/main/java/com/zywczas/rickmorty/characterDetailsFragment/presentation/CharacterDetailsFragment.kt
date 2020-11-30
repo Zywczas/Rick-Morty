@@ -35,8 +35,8 @@ class CharacterDetailsFragment @Inject constructor(
     }
 
     private fun setupMessageObserver(){
-        viewModel.message.observe(viewLifecycleOwner){event ->
-            event.getContentIfNotHandled()?.let { showMessage(it) }
+        viewModel.message.observe(viewLifecycleOwner){msg ->
+            showMessage(msg)
         }
     }
 
