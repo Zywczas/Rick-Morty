@@ -61,6 +61,7 @@
             android:layout_marginEnd="8dp"
             android:text="Click to add a new photo"
             android:textColor="@android:color/black"
+            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="@+id/photoImageView_LocalPhotos"
             app:layout_constraintEnd_toEndOf="@+id/photoImageView_LocalPhotos"
             app:layout_constraintStart_toStartOf="@+id/photoImageView_LocalPhotos"
