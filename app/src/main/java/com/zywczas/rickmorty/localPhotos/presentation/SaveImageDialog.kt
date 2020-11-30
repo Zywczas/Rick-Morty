@@ -18,6 +18,11 @@ import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.utilities.showSnackbar
 import kotlinx.android.synthetic.main.dialog_add_photo.*
 
+//todo pytanie do Michała:
+//czy mozna uzywac takiej klasy jak ta ponizej, zeby zarzadzala pobieraniem zdjecia i pozniej jakos
+//sensownie przekazac to do fragmentu LocalPhotosFragment? Pewnie musialoby leciec przez activity.
+//Czy lepiej cala ta logike trzymac w 1 fragmencie? Duzo linijek kodu sie robi. Jak do tego jeszcze
+//doda sie zapisywanie zdjecia do Room'a to juz wogole bedzie potezny LocalPhotosFragment
 class SaveImageDialog : DialogFragment(){
 
     private val storageRequestCode by lazy { 1234 }
