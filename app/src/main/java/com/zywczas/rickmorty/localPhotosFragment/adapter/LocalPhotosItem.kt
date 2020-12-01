@@ -1,12 +1,13 @@
 package com.zywczas.rickmorty.localPhotosFragment.adapter
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.items.AbstractItem
 import com.zywczas.rickmorty.R
-import com.zywczas.rickmorty.localCharacterListFragment.adapter.LocalCharacterListItem
 import com.zywczas.rickmorty.model.Photo
 
 class LocalPhotosItem (
@@ -27,11 +28,14 @@ class LocalPhotosItem (
         private val timeStamp : TextView = itemView.findViewById(R.id.timeStamp_localPhotosItem)
 
         override fun bindView(item: LocalPhotosItem, payloads: List<Any>) {
-            TODO("Not yet implemented")
+            timeStamp.text = photo.timeStamp
+            val bitmap = BitmapFactory.decodeByteArray(photo.photoByteArray, 0, 0)
+            image.setImageBitmap(bitmap)
         }
 
         override fun unbindView(item: LocalPhotosItem) {
-            TODO("Not yet implemented")
+            timeStamp.text = null
+            image.setImageBitmap(null)
         }
 
 

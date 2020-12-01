@@ -5,6 +5,7 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -20,12 +21,17 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import com.mikepenz.fastadapter.FastAdapter
+import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.factories.UniversalViewModelFactory
+import com.zywczas.rickmorty.localPhotosFragment.adapter.LocalPhotosItem
 import com.zywczas.rickmorty.model.Photo
 import com.zywczas.rickmorty.utilities.logD
 import com.zywczas.rickmorty.utilities.mainAppBarConfiguration
 import com.zywczas.rickmorty.utilities.showSnackbar
+import kotlinx.android.synthetic.main.fragment_local_character_list.*
 import kotlinx.android.synthetic.main.fragment_local_photos.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -40,6 +46,7 @@ class LocalPhotosFragment @Inject constructor(
 ) : Fragment(R.layout.fragment_local_photos) {
 
     private val viewModel : LocalPhotosViewModel by viewModels { viewModelFactory }
+    private val itemAdapter by lazy { ItemAdapter<LocalPhotosItem>() }
     private val storageRequestCode by lazy { 1234 }
     private val cameraRequestCode by lazy { 4321 }
     private val cameraPermission by lazy { arrayOf(Manifest.permission.CAMERA) }
@@ -50,7 +57,6 @@ class LocalPhotosFragment @Inject constructor(
     private var imageUri : Uri? = null
     private val kBThreshold by lazy { 1024 }
     private val kB by lazy { 1024 }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -68,7 +74,24 @@ class LocalPhotosFragment @Inject constructor(
     }
 
     private fun setupRecyclerView(){
+        setupRvAdapter()
+        setupRvLayoutManager()
+        recyclerView_localCharacterList.setHasFixedSize(true)
+    }
 
+    private fun setupRvAdapter(){
+        val fastAdapter = FastAdapter.with(itemAdapter)
+        recyclerView_localPhotos.adapter = fastAdapter
+    }
+
+    private fun setupRvLayoutManager(){
+        var spanCount = 2
+        val orientation = resources.configuration.orientation
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE){
+            spanCount = 4
+        }
+        val layoutManager = GridLayoutManager(requireContext(), spanCount)
+        recyclerView_localPhotos.layoutManager = layoutManager
     }
 
     private fun setupObservers(){
