@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.zywczas.rickmorty.onlineCharacterListFragment.presentation.OnlineCharacterListViewModel
 import com.zywczas.rickmorty.localCharacterListFragment.presentation.LocalCharacterListViewModel
 import com.zywczas.rickmorty.characterDetailsFragment.presentation.CharacterDetailsViewModel
+import com.zywczas.rickmorty.localPhotosFragment.presentation.LocalPhotosViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -25,4 +26,9 @@ abstract class ViewModelFactoryModule {
     @IntoMap
     @ViewModelKey(LocalCharacterListViewModel::class)
     abstract fun bindLocalCharacterListViewModel(vm: LocalCharacterListViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(LocalPhotosViewModel::class)
+    abstract fun bindLocalPhotosViewModel(vm: LocalPhotosViewModel) : ViewModel
 }

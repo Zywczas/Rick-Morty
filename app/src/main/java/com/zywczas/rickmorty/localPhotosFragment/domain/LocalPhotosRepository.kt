@@ -1,4 +1,4 @@
-package com.zywczas.rickmorty.localPhotos.domain
+package com.zywczas.rickmorty.localPhotosFragment.domain
 
 import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.model.Photo
@@ -26,10 +26,9 @@ class LocalPhotosRepository @Inject constructor(private val dao: PhotosDao) {
 
     private fun toPhotos(photosDbEntities: List<PhotoDbEntity>) : List<Photo>{
         val photos = mutableListOf<Photo>()
-        photosDbEntities.forEach {
-            val photo = toPhoto(it)
-            photos.add(photo)
-        }
+        photosDbEntities.forEach { photos.add(toPhoto(it)) }
         return photos
     }
+
+
 }
