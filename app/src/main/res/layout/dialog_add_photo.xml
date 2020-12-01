@@ -14,7 +14,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="Take a photo"
-        android:textColor="@color/darkGreen"
+        android:textColor="@color/blue2"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -43,7 +43,7 @@
         android:layout_marginEnd="16dp"
         android:breakStrategy="high_quality"
         android:text="Choose from Gallery"
-        android:textColor="@color/blue2"
+        android:textColor="@color/darkGreen"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

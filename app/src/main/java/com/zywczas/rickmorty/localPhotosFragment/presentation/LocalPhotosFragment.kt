@@ -6,6 +6,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
@@ -13,12 +14,18 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.zywczas.rickmorty.R
+import com.zywczas.rickmorty.utilities.logD
 import com.zywczas.rickmorty.utilities.mainAppBarConfiguration
 import com.zywczas.rickmorty.utilities.showSnackbar
 import kotlinx.android.synthetic.main.fragment_local_photos.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
 class LocalPhotosFragment @Inject constructor() : Fragment(R.layout.fragment_local_photos) {
@@ -29,6 +36,10 @@ class LocalPhotosFragment @Inject constructor() : Fragment(R.layout.fragment_loc
     private val storagePermissions by lazy { arrayOf(
         Manifest.permission.READ_EXTERNAL_STORAGE,
         Manifest.permission.WRITE_EXTERNAL_STORAGE) }
+    private var imageBitmap : Bitmap? = null
+    private var imageUri : Uri? = null
+    private val kBThreshold by lazy { 1024 }
+    private val kB by lazy { 1024 }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -49,7 +60,8 @@ class LocalPhotosFragment @Inject constructor() : Fragment(R.layout.fragment_loc
     }
 
     private fun setupOnClickListeners(){
-        photoImageView_LocalPhotos.setOnClickListener{ choosePhotoSource() }
+        photo_LocalPhotos.setOnClickListener{ choosePhotoSource() }
+        saveToList_LocalPhotos.setOnClickListener { resizeImageAndAddToList() }
     }
 
     private fun choosePhotoSource(){
@@ -88,17 +100,25 @@ class LocalPhotosFragment @Inject constructor() : Fragment(R.layout.fragment_loc
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == cameraRequestCode && resultCode == Activity.RESULT_OK){
             val bitmap = data?.extras?.get("data") as? Bitmap
-            bitmap?.let {
-                photoImageView_LocalPhotos.setImageBitmap(it)
-                addPhotoTxtView_LocalPhotos.isVisible = false
-            }
+            bitmap?.let {setImageSource(it) }
         } else if (requestCode == storageRequestCode && resultCode == Activity.RESULT_OK){
             val selectedImageUri = data?.data
-            selectedImageUri?.let {
-                photoImageView_LocalPhotos.setImageURI(it)
-                addPhotoTxtView_LocalPhotos.isVisible = false
-            }
+            selectedImageUri?.let { setImageSource(it) }
         }
+    }
+
+    private fun setImageSource(bitmap: Bitmap){
+        imageBitmap = bitmap
+        imageUri = null
+        photo_LocalPhotos.setImageBitmap(bitmap)
+        infoAddPhoto_LocalPhotos.isVisible = false
+    }
+
+    private fun setImageSource(uri: Uri){
+        imageUri = uri
+        imageBitmap = null
+        photo_LocalPhotos.setImageURI(uri)
+        infoAddPhoto_LocalPhotos.isVisible = false
     }
 
     private fun getCameraPermissionAndTakePhotoOnPermissionResult(){
@@ -146,6 +166,53 @@ class LocalPhotosFragment @Inject constructor() : Fragment(R.layout.fragment_loc
 
     private fun getStoragePermissionAndDisplayImageOnPermissionResult(){
         requestPermissions(storagePermissions, storageRequestCode)
+    }
+
+    private fun resizeImageAndAddToList(){
+        if (imageBitmap != null) {
+            progressBar_LocalPhotos.isVisible = true
+            resizeBitmapAndAddToList(imageBitmap!!)
+        } else if (imageUri != null){
+            progressBar_LocalPhotos.isVisible = true
+//            resizeImageFromUriAndAddToList(imageUri)
+        } else {
+            showSnackbar(R.string.no_photo_to_save)
+        }
+    }
+
+    private fun resizeBitmapAndAddToList(bitmap: Bitmap){
+        lifecycleScope.launch {
+            val resized = resizeBitmapToByteArray(bitmap)
+
+            progressBar_LocalPhotos.isVisible = false
+        }
+
+    }
+
+    private suspend fun resizeBitmapToByteArray(bitmap: Bitmap) : ByteArray?{
+        return withContext(Dispatchers.IO){
+            var bytes : ByteArray? = null
+            for (i in 1..10) {
+                val quality = 100 - (i*10)
+                bytes = getBytesFromBitmap(bitmap, quality)
+                logD("rozmiar konwertowanego zdjecia: ($quality%): ${bytes.size/kB} kB")
+                if (bytes.size/kB < kBThreshold) {
+                    break
+                }
+                if (i == 10){
+                    bytes = null
+                    showSnackbar(R.string.too_big_photo)
+                }
+            }
+            logD("ostateczny rozmiar zdjecia: ${bytes?.size?.div(kB)}")
+            bytes
+        }
+    }
+
+    private fun getBytesFromBitmap(bitmap: Bitmap, quality: Int) : ByteArray{
+        val stream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, quality, stream)
+        return stream.toByteArray()
     }
 
 }
