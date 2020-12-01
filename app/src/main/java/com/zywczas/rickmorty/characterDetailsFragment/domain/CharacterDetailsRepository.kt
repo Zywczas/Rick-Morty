@@ -24,9 +24,9 @@ class CharacterDetailsRepository @Inject constructor(
             val characterFromDb = toCharacterFromDb(character)
             val result = dao.insert(characterFromDb)
             return if (result == -1L){
-                R.string.action_error
+                R.string.operation_error
             } else {
-                R.string.action_success
+                R.string.operation_success
             }
         }
 
@@ -34,9 +34,9 @@ class CharacterDetailsRepository @Inject constructor(
             val characterFromDb = toCharacterFromDb(character)
             val numberOfRowsRemoved = dao.delete(characterFromDb)
             return if (numberOfRowsRemoved == 0){
-                R.string.action_error
+                R.string.operation_error
             } else {
-                R.string.action_error
+                R.string.operation_error
             }
         }
 

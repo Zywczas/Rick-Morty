@@ -13,9 +13,9 @@ class LocalPhotosRepository @Inject constructor(private val dao: PhotosDao) {
     suspend fun addPhotoToDb(photo : Photo) : Int {
         val result = dao.insert(toPhotoDbEntity(photo))
         return if (result == -1L){
-            R.string.action_error
+            R.string.operation_error
         } else {
-            R.string.action_success
+            R.string.operation_success
         }
     }
 
