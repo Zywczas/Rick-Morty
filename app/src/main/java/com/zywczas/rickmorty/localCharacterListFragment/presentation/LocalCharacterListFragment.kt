@@ -2,11 +2,13 @@ package com.zywczas.rickmorty.localCharacterListFragment.presentation
 
 import android.content.res.Configuration
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import androidx.annotation.StringRes
+import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -14,21 +16,20 @@ import com.bumptech.glide.RequestManager
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
+import com.mikepenz.fastadapter.dsl.genericFastAdapter
 import com.zywczas.rickmorty.R
-import com.zywczas.rickmorty.SessionManager
 import com.zywczas.rickmorty.localCharacterListFragment.adapter.LocalCharacterListItem
 import com.zywczas.rickmorty.model.Character
-import com.zywczas.rickmorty.localCharacterListFragment.utils.LocalCharacterListStatus
 import com.zywczas.rickmorty.factories.UniversalViewModelFactory
 import com.zywczas.rickmorty.utilities.attachAppBarConfiguration
 import com.zywczas.rickmorty.utilities.showSnackbar
 import kotlinx.android.synthetic.main.fragment_local_character_list.*
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class LocalCharacterListFragment @Inject constructor (
     private val viewModelFactory: UniversalViewModelFactory,
-    private val glide: RequestManager,
-    private val session: SessionManager
+    private val glide: RequestManager
 ) : Fragment(R.layout.fragment_local_character_list) {
 
     private val viewModel : LocalCharacterListViewModel by viewModels { viewModelFactory }
@@ -39,7 +40,8 @@ class LocalCharacterListFragment @Inject constructor (
         setupNavigationUI()
         setupRecyclerView()
         setupCharactersObserver()
-        checkConnection()
+        setupMessageObserver()
+        setupIsDatabaseEmptyObserver()
     }
 
     private fun setupNavigationUI(){
@@ -64,6 +66,11 @@ class LocalCharacterListFragment @Inject constructor (
         recyclerView_localCharacterList.adapter = fastAdapter
     }
 
+    private fun goToDetailsFragment(character : Character){
+        val directions = LocalCharacterListFragmentDirections.actionToDetails(character)
+        findNavController().navigate(directions)
+    }
+
     private fun setupRvLayoutManager(){
         var spanCount = 2
         val orientation = resources.configuration.orientation
@@ -74,49 +81,33 @@ class LocalCharacterListFragment @Inject constructor (
         recyclerView_localCharacterList.layoutManager = layoutManager
     }
 
-    private fun goToDetailsFragment(character : Character){
-        val directions = LocalCharacterListFragmentDirections.actionToDetails(character)
-        findNavController().navigate(directions)
-    }
-
     private fun setupCharactersObserver(){
-        viewModel.characters.observe(viewLifecycleOwner){ resource ->
-            when (resource.status){
-                LocalCharacterListStatus.SUCCESS -> updateUI(resource.data!!)
-                LocalCharacterListStatus.ERROR -> resource.message?.getContentIfNotHandled()?.let { showMessage(it) }
-            }
-        }
+        viewModel.characters.observe(viewLifecycleOwner){ addToRecyclerView(it) }
     }
 
-    private fun updateUI(characters : List<Character>){
-        addToRecyclerView(characters){finished ->
-            if (finished){
-                updateInfoAboutEmptyDb()
-            }
-        }
-    }
-
-    private fun addToRecyclerView(characters : List<Character>, complete: (Boolean) -> Unit){
+    private fun addToRecyclerView(characters : List<Character>){
         val items = mutableListOf<LocalCharacterListItem>()
         characters.forEach {
             val item = LocalCharacterListItem(it, glide)
             items.add(item)
         }
         FastAdapterDiffUtil[itemAdapter] = items
-        complete(true)
     }
 
-    private fun updateInfoAboutEmptyDb(){
-        emptyList_TextView_localCharacterList.isVisible = itemAdapter.itemList.isEmpty
+    private fun setupMessageObserver(){
+        viewModel.message.observe(viewLifecycleOwner){ showSnackbar(it) }
     }
 
-    private fun showMessage(@StringRes msg :  Int){
-        showSnackbar(msg)
+    private fun setupIsDatabaseEmptyObserver(){
+        viewModel.isDataBaseEmpty.observe(viewLifecycleOwner){
+            emptyList_TextView_localCharacterList.isVisible = it
+        }
     }
 
-    private fun checkConnection(){
-        if (session.isConnected.not()){
-            showMessage(R.string.connection_error)
+    override fun onResume() {
+        super.onResume()
+        lifecycleScope.launch {
+            viewModel.updateUI()
         }
     }
 

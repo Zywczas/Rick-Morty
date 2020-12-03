@@ -12,9 +12,8 @@ interface CharacterDao {
     @Delete
     suspend fun delete(character : CharacterFromDb) : Int
 
-    @Throws(Exception::class)
     @Query("SELECT * FROM characters")
-    fun getCharacters() : Flow<List<CharacterFromDb>>
+    suspend fun getAllCharacters() : List<CharacterFromDb>
 
     @Query("SELECT COUNT(id) FROM characters WHERE id == :characterId")
     suspend fun getCount(characterId: Long) : Int
