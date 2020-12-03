@@ -23,11 +23,15 @@ fun Fragment.showSnackbar(@StringRes msg: Int) {
 }
 
 private const val tag = "RickAndMorty"
-fun logD(msg : String) = Log.d(tag, msg)
-fun logD(e : Throwable) = Log.d(tag, "${e.message}")
+fun Any.logD(message : String) = Log.d("$tag in ${this.javaClass.name}", message)
+fun Any.logD(e : Throwable) = Log.d("$tag in ${this.javaClass.name}", "${e.message}")
 
-fun mainAppBarConfiguration(drawer : Openable? = null) = AppBarConfiguration(setOf(R.id.destination_LocalCharacterList, R.id.destination_OnlineCharacterList,
-R.id.destination_LocalPhotosFragment), drawer)
+fun Openable.attachAppBarConfiguration() = AppBarConfiguration(setOf(R.id.destination_LocalCharacterList, R.id.destination_OnlineCharacterList,
+    R.id.destination_LocalPhotosFragment), this)
+
+
 
 //todo dodac pagination w DB module
 //todo spawdzic czy diff util w LocalCharacterListFragment da sie ustawic tak zeby nie przeskakiwal na poczatek listy
+//todo zapisywac zdjecia do galerii a do bazy danych tylko path
+//todo dac konwertowanie zdjec do base64

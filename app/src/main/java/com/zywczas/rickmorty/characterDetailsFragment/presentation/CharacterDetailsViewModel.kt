@@ -1,6 +1,8 @@
 package com.zywczas.rickmorty.characterDetailsFragment.presentation
 
+import android.graphics.drawable.Drawable
 import androidx.annotation.StringRes
+import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

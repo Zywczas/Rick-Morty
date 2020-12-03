@@ -24,12 +24,14 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
+import com.mikepenz.fastadapter.diff.FastAdapterDiffUtil
 import com.zywczas.rickmorty.R
 import com.zywczas.rickmorty.factories.UniversalViewModelFactory
+import com.zywczas.rickmorty.localCharacterListFragment.adapter.LocalCharacterListItem
 import com.zywczas.rickmorty.localPhotosFragment.adapter.LocalPhotosItem
 import com.zywczas.rickmorty.model.Photo
+import com.zywczas.rickmorty.utilities.attachAppBarConfiguration
 import com.zywczas.rickmorty.utilities.logD
-import com.zywczas.rickmorty.utilities.mainAppBarConfiguration
 import com.zywczas.rickmorty.utilities.showSnackbar
 import kotlinx.android.synthetic.main.fragment_local_character_list.*
 import kotlinx.android.synthetic.main.fragment_local_photos.*
@@ -37,8 +39,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.ByteArrayOutputStream
-import java.sql.Time
-import java.util.*
 import javax.inject.Inject
 
 class LocalPhotosFragment @Inject constructor(
@@ -68,7 +68,7 @@ class LocalPhotosFragment @Inject constructor(
 
     private fun setupNavigationUI(){
         val navController = findNavController()
-        val appBarConfig = mainAppBarConfiguration(drawerLayout_localPhotos)
+        val appBarConfig = drawerLayout_localPhotos.attachAppBarConfiguration()
         navDrawer_localPhotos.setupWithNavController(navController)
         toolbar_localPhotos.setupWithNavController(navController, appBarConfig)
     }
@@ -76,7 +76,7 @@ class LocalPhotosFragment @Inject constructor(
     private fun setupRecyclerView(){
         setupRvAdapter()
         setupRvLayoutManager()
-        recyclerView_localCharacterList.setHasFixedSize(true)
+        recyclerView_localPhotos.setHasFixedSize(true)
     }
 
     private fun setupRvAdapter(){
@@ -118,7 +118,16 @@ class LocalPhotosFragment @Inject constructor(
     }
 
     private fun updateUI(photos : List<Photo>){
+        addToRecyclerView(photos)
+    }
 
+    private fun addToRecyclerView(photos : List<Photo>){
+        val items = mutableListOf<LocalPhotosItem>()
+        photos.forEach {
+            val item = LocalPhotosItem(it)
+            items.add(item)
+        }
+        itemAdapter.add(items)
     }
 
     private fun setupOnClickListeners(){

@@ -1,33 +1,47 @@
 package com.zywczas.rickmorty.characterDetailsFragment.presentation
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.RequestManager
 import com.zywczas.rickmorty.R
+import com.zywczas.rickmorty.databinding.FragmentDetailsBinding
 import com.zywczas.rickmorty.utilities.logD
 import com.zywczas.rickmorty.factories.UniversalViewModelFactory
-import com.zywczas.rickmorty.utilities.mainAppBarConfiguration
 import com.zywczas.rickmorty.utilities.showSnackbar
 import kotlinx.android.synthetic.main.fragment_details.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class CharacterDetailsFragment @Inject constructor(
-    private val glide : RequestManager,
     private val viewModelFactory : UniversalViewModelFactory
-) : Fragment(R.layout.fragment_details) {
+) : Fragment() {
 
     private val viewModel : CharacterDetailsViewModel by viewModels { viewModelFactory }
     private val args : CharacterDetailsFragmentArgs by navArgs()
     private val character by lazy { args.character }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val binding = FragmentDetailsBinding.inflate(inflater, container, false)
+        binding.apply {
+            lifecycleOwner = viewLifecycleOwner
+            characterXML = character
+            vm = viewModel
+        }
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -54,21 +68,9 @@ class CharacterDetailsFragment @Inject constructor(
     }
 
     private fun setupUIState(complete: (Boolean) -> Unit){
-        setupCharacterInfo()
         setupAddToDbBtnState()
         setupNavigationUI()
         complete(true)
-    }
-
-    private fun setupCharacterInfo(){
-        character.imageUrl?.let { glide.load(it).into(poster_imageView_Details) }
-        name_txtV_Details.text = character.name
-        status_txtV_Details.text = getString(R.string.status, character.status, character.species)
-        type_txtV_Details.text = getString(R.string.type, character.type)
-        gender_txtV_Details.text = getString(R.string.gender, character.gender)
-        origin_txtV_Details.text = getString(R.string.origin, character.origin)
-        location_txtV_Details.text = getString(R.string.location, character.location)
-        created_txtV_Details.text = getString(R.string.created, character.created)
     }
 
     private fun setupAddToDbBtnState(){
@@ -84,8 +86,7 @@ class CharacterDetailsFragment @Inject constructor(
     }
 
     private fun setupNavigationUI(){
-        val appBarConfig = mainAppBarConfiguration()
-        toolbar_details.setupWithNavController(findNavController(), appBarConfig)
+        toolbar_details.setupWithNavController(findNavController())
     }
 
     private fun setupOnClickListeners(){

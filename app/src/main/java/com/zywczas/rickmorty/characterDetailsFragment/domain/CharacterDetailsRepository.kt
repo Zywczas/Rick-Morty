@@ -36,7 +36,7 @@ class CharacterDetailsRepository @Inject constructor(
             return if (numberOfRowsRemoved == 0){
                 R.string.operation_error
             } else {
-                R.string.operation_error
+                R.string.operation_success
             }
         }
 

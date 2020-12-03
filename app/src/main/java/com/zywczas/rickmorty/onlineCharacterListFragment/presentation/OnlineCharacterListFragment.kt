@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.RequestManager
@@ -22,9 +21,8 @@ import com.zywczas.rickmorty.onlineCharacterListFragment.adapter.OnlineCharacter
 import com.zywczas.rickmorty.model.Character
 import com.zywczas.rickmorty.onlineCharacterListFragment.utils.OnlineCharacterListStatus
 import com.zywczas.rickmorty.factories.UniversalViewModelFactory
-import com.zywczas.rickmorty.utilities.mainAppBarConfiguration
+import com.zywczas.rickmorty.utilities.attachAppBarConfiguration
 import com.zywczas.rickmorty.utilities.showSnackbar
-import kotlinx.android.synthetic.main.fragment_local_photos.*
 import kotlinx.android.synthetic.main.fragment_online_character_list.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -57,7 +55,7 @@ class OnlineCharacterListFragment @Inject constructor(
 
     private fun setupNavigationUI(){
         val navController = findNavController()
-        val appBarConfig = mainAppBarConfiguration(drawerLayout_onlineCharacterList)
+        val appBarConfig = drawerLayout_onlineCharacterList.attachAppBarConfiguration()
         navDrawer_onlineCharacterList.setupWithNavController(navController)
         toolbar_onlineCharacterList.setupWithNavController(navController, appBarConfig)
     }

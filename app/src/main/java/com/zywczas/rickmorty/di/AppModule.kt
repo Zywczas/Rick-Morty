@@ -1,6 +1,7 @@
 package com.zywczas.rickmorty.di
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Room
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
@@ -10,6 +11,7 @@ import com.zywczas.rickmorty.model.db.CharacterDao
 import com.zywczas.rickmorty.model.db.AppDatabase
 import com.zywczas.rickmorty.model.db.PhotosDao
 import com.zywczas.rickmorty.model.webservice.ApiService
+import com.zywczas.rickmorty.utilities.glideRequestOptions
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.Dispatchers
@@ -21,6 +23,10 @@ import javax.inject.Singleton
 object AppModule {
 
     private const val baseUrl = "https://rickandmortyapi.com/"
+
+    @Provides
+    @Singleton
+    fun provideAppContext(app: Application) : Context = app.applicationContext
 
     @Provides
     @Singleton
@@ -36,15 +42,9 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideRequestOptions() : RequestOptions = RequestOptions()
-        .placeholder(R.drawable.white_background)
-        .error(R.drawable.error_image)
-
-    @Provides
-    @Singleton
-    fun provideGlide(app: Application, options: RequestOptions) : RequestManager =
-        Glide.with(app)
-            .setDefaultRequestOptions(options)
+    fun provideGlide(context : Context) : RequestManager =
+        Glide.with(context)
+            .setDefaultRequestOptions(glideRequestOptions)
 
     @Provides
     @Singleton
@@ -52,8 +52,8 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideCharactersDatabase(app: Application) : AppDatabase =
-        Room.databaseBuilder(app.applicationContext, AppDatabase::class.java, "CharactersDB")
+    fun provideCharactersDatabase(context : Context) : AppDatabase =
+        Room.databaseBuilder(context, AppDatabase::class.java, "CharactersDB")
             .build()
 
     @Provides

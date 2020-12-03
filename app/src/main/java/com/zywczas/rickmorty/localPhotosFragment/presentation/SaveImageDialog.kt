@@ -25,6 +25,12 @@ import kotlinx.android.synthetic.main.dialog_add_photo.*
 //doda sie zapisywanie zdjecia do Room'a to juz wogole bedzie potezny LocalPhotosFragment
 class SaveImageDialog : DialogFragment(){
 
+    companion object{
+
+
+    }
+
+    //todo jako const val request code i camera permission
     private val storageRequestCode by lazy { 1234 }
     private val cameraRequestCode by lazy { 4321 }
     private val cameraPermission by lazy { arrayOf(Manifest.permission.CAMERA) }

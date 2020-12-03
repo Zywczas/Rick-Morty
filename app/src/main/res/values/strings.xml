@@ -6,13 +6,15 @@
     <string name="my_favourites">My Favourites</string>
     <string name="character_details">Character Details</string>
     <string name="your_saved_photos">Your saved photos</string>
-    <string name="status">Status: %1$s %2$s</string>
-    <string name="type">Type: %1$s</string>
-    <string name="gender">Gender: %1$s</string>
-    <string name="origin">Origin: %1$s</string>
-    <string name="location">Location: %1$s</string>
-    <string name="created">Created: %1$s</string>
+    <string name="status">Status:</string>
+    <string name="type">Type:</string>
+    <string name="gender">Gender:</string>
+    <string name="origin">Origin:</string>
+    <string name="location">Location:</string>
+    <string name="created">Created:</string>
     <string name="cancel">Cancel</string>
+    <string name="add_to_favourites">Add to favourites</string>
+    <string name="remove_from_favourites">Remove from favourites</string>
 
     <!--    UI messages-->
     <string name="browse_characters">Your list is empty. Click All Stars from upper-left corner menu to find your favourite characters.</string>
